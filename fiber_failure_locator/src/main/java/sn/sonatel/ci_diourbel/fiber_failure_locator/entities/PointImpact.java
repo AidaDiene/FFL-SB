@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,14 +20,24 @@ public class PointImpact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false)
+	@NotNull
 	private Double latitude;
+	@Column(nullable = false)
+	@NotNull
 	private Double longitude;
 	@ManyToOne
+	@Column(nullable = false)
+	@NotNull
 	private Itineraire itineraire;
 	@ManyToMany
 	private List<Drone> drones = new ArrayList<>();
 	@ManyToOne
+	@Column(nullable = false)
+	@NotNull
 	private User user;
+	@Column(nullable = false)
+	@NotNull
 	private Date dateRecherche;
 	
 	public PointImpact() {

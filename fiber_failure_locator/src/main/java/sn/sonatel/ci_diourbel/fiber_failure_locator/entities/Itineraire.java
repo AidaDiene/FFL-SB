@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,19 +21,28 @@ public class Itineraire {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false)
+	@NotNull
 	private String nom;
 	@ManyToOne
+	@Column(nullable = false)
+	@NotNull
 	private PointGeographique depart;
 	@ManyToOne
+	@Column(nullable = false)
+	@NotNull
 	private PointGeographique arrivee;
 	@ManyToMany
 	private List<PointGeographique> pointGeographiques = new ArrayList<>();
 	@OneToMany(mappedBy = "itineraire")
 	private List<PointImpact> pointImpact;
 	@ManyToOne
+	@Column(nullable = false)
+	@NotNull
 	private User userCreate;
 	@ManyToOne
 	private User userUpdate;
+	@Column(updatable = false)
 	private Date dateCreate; 
 	private Date dateUpdate;
 	

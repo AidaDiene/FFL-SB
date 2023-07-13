@@ -3,6 +3,9 @@ package sn.sonatel.ci_diourbel.fiber_failure_locator.entities;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,17 +19,28 @@ public class PointGeographique {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false)
+	@NotNull
 	private String nom;
+	@Column(nullable = false)
+	@NotNull
 	private Double latitude;
+	@Column(nullable = false)
+	@NotNull
 	private Double longitude;
 	@ManyToOne
+	@Column(nullable = false)
+	@NotNull
 	private TypePointGeographique type;
 	@ManyToMany(mappedBy = "pointGeographiques")
     private List<Itineraire> itineraires;
 	@ManyToOne
+	@Column(nullable = false)
+	@NotNull
 	private User userCreate;
 	@ManyToOne
 	private User userUpdate;
+	@Column(updatable = false)
 	private Date dateCreate; 
 	private Date dateUpdate;
 	

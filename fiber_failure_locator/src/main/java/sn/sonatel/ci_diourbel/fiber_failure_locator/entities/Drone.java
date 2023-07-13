@@ -3,6 +3,9 @@ package sn.sonatel.ci_diourbel.fiber_failure_locator.entities;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,14 +19,19 @@ public class Drone {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false, unique = true)
+	@NotNull
 	private String matricule;
 	private String modele;
 	@ManyToMany(mappedBy = "drones")
     private List<PointImpact> pointImpacts;
 	@ManyToOne
+	@Column(nullable = false)
+	@NotNull
 	private User userCreate;
 	@ManyToOne
 	private User userUpdate;
+	@Column(updatable = false)
 	private Date dateCreate; 
 	private Date dateUpdate;
 	

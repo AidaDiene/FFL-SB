@@ -1,5 +1,8 @@
 package sn.sonatel.ci_diourbel.fiber_failure_locator.entities;
 
+import javax.validation.constraints.NotNull;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,11 +14,21 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false)
+	@NotNull
 	private String prenom;
+	@Column(nullable = false)
+	@NotNull
 	private String nom;
+	@Column(nullable = false, unique = true)
+	@NotNull
 	private String matricule;
 	private String telephone;
+	@Column(nullable = false, unique = true)
+	@NotNull
 	private String email;
+	@Column(nullable = false)
+	@NotNull
 	private String password;
 	private boolean isAdmin;
 	
