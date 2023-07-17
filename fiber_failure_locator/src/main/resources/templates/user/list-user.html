@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css"
+href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Liste des Produits</title>
+</head>
+<body>
+<div class="container mt-5">
+<div class="card">
+<div class="card-header">
+Liste des Utilisateurs
+<br>
+<a th:href="@{/utilisateurs/showNewUserForm}"> Nouveau utilisateur </a>
+</div>
+<div class="card-body">
+<table class="table table-striped">
+<tr>
+<th>ID</th>
+<th>Prenom</th>
+<th>Nom</th>
+<th>Matricule</th>
+<th>Email</th>
+<th>Telephone</th>
+<th>Admin</th>
+<th>Actions</th>
+</tr>
+<tr th:each="u:${users}">
+<td th:text="${u.id}"></td>
+<td th:text="${u.prenom}"></td>
+<td th:text="${u.nom}"></td>
+<td th:text="${u.matricule}"></td>
+<td th:text="${u.email}"></td>
+<td th:text="${u.telephone}"></td>
+<td th:text="${u.admin}"></td>
+<td> 
+<a th:href="@{/utilisateurs/showUser/{id}(id=${u.id})}">Voir</a>
+<a th:href="@{/utilisateurs/showUserEditFrom/{id}(id=${u.id})}">Modifier</a>
+<a th:href="@{/utilisateurs/deleteUser/{id}(id=${u.id})}">Supprimer</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

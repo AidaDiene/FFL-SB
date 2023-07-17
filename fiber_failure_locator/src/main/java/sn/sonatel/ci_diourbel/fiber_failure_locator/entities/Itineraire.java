@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -25,11 +26,11 @@ public class Itineraire {
 	@NotNull
 	private String nom;
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false)
 	@NotNull
 	private PointGeographique depart;
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false)
 	@NotNull
 	private PointGeographique arrivee;
 	@ManyToMany
@@ -37,7 +38,7 @@ public class Itineraire {
 	@OneToMany(mappedBy = "itineraire")
 	private List<PointImpact> pointImpact;
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false)
 	@NotNull
 	private User userCreate;
 	@ManyToOne

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Détails de l'utilisateur</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h2>Détails de l'utilisateur</h2>
+  <table>
+    <tr>
+      <th>Attribut</th>
+      <th>Valeur</th>
+    </tr>
+    <tr>
+      <td>Prénom</td>
+      <td th:text="${user.prenom}"></td>
+    </tr>
+    <tr>
+      <td>Nom</td>
+      <td th:text="${user.nom}"></td>
+    </tr>
+    <tr>
+      <td>Matricule</td>
+      <td th:text="${user.matricule}"></td>
+    </tr>
+    <tr>
+      <td>Téléphone</td>
+      <td th:text="${user.telephone}"></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td th:text="${user.email}"></td>
+    </tr>
+    <tr>
+      <td>Mot de passe</td>
+      <td th:text="${user.password}"></td>
+    </tr>
+    <tr>
+      <td>Est administrateur</td>
+      <td th:text="${user.isAdmin}"></td>
+    </tr>
+  </table>
+</body>
+</html>

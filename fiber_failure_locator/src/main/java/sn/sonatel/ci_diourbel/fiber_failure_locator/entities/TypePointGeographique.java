@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -28,24 +29,43 @@ public class TypePointGeographique {
 	@OneToMany(mappedBy = "type")
 	private List<PointGeographique> pointGeographiques;
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false)
 	@NotNull
 	private User userCreate;
 	@ManyToOne
 	private User userUpdate;
 	@Column(updatable = false)
 	private Date dateCreate; 
-	private Date dateUpdate;
 	
 	public TypePointGeographique() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public TypePointGeographique(String nom) {
+	public TypePointGeographique(@NotNull String nom, @NotNull String code) {
 		super();
 		this.nom = nom;
+		this.code = code;
 	}
+
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public List<PointGeographique> getPointGeographiques() {
+		return pointGeographiques;
+	}
+
+	public void setPointGeographiques(List<PointGeographique> pointGeographiques) {
+		this.pointGeographiques = pointGeographiques;
+	}
+
+	private Date dateUpdate;
 
 	public Long getId() {
 		return id;
@@ -97,7 +117,8 @@ public class TypePointGeographique {
 
 	@Override
 	public String toString() {
-		return "TypePointGeographique [nom=" + nom + "]";
+		return "TypePointGeographique [nom=" + nom + ", code=" + code + "]";
 	}
+
 	
 }

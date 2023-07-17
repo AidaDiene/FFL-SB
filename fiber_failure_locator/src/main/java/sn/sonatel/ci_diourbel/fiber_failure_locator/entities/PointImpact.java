@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
@@ -27,13 +28,13 @@ public class PointImpact {
 	@NotNull
 	private Double longitude;
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false)
 	@NotNull
 	private Itineraire itineraire;
 	@ManyToMany
 	private List<Drone> drones = new ArrayList<>();
 	@ManyToOne
-	@Column(nullable = false)
+	@JoinColumn(nullable = false)
 	@NotNull
 	private User user;
 	@Column(nullable = false)
