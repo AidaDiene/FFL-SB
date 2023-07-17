@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
     <title>Modification d'un utilisateur</title>
 </head>
 <body>
+	<div th:replace="layout::navbar"></div>
     <h2>Modification d'un utilisateur</h2>
     <form th:action="@{/utilisateurs/updateUser}" th:object="${user}" method="post">
         <input type="hidden" name="id" th:value="${user.id}">

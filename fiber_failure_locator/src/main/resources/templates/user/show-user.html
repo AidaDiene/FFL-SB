@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
   <title>Détails de l'utilisateur</title>
   <style>
     table {
@@ -15,6 +16,7 @@
   </style>
 </head>
 <body>
+	<div th:replace="layout::navbar"></div>
   <h2>Détails de l'utilisateur</h2>
   <table>
     <tr>
