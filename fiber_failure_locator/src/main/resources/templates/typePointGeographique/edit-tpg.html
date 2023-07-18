@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+    <title>Modification d'un type point geographique</title>
+</head>
+<body>
+		<div th:replace="layout::navbar"></div>
+    <h2>Modification d'un type point geographique</h2>
+    <form action="#" th:action="@{/typePointGeographique/updateTypePointGeographique/{id}(id=${tpg.id})}" th:object="${tpg}" method="post">
+        
+        <label for="nom">Nom:</label>
+        <input type="text" name="nom" th:value="${tpg.nom}" required>
+        <br>
+        <label for="code">Code:</label>
+        <input type="text" name="code" th:value="${tpg.code}">
+        <br>
+        <button type="submit">Modifier</button>
+    </form>
+</body>
+</html>

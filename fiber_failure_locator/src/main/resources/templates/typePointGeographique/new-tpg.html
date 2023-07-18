@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+  <meta charset="UTF-8">
+  <title>Créer un type point geographique</title>
+</head>
+<body>
+	<div th:replace="layout::navbar"></div>
+  <h1>Créer un type point geographique</h1>
+  <form th:action="@{/typePointGeographique/saveTypePointGeographique}" th:object="${tpg}" method="post">
+   
+    <label for="nom">Nom:</label>
+    <input type="text" id="nom" name="nom" required><br>
+
+    <label for="code">Code:</label>
+    <input type="text" id="code" name="code" required><br>
+
+    <input type="submit" value="Créer">
+  </form>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+  <title>Détails d'un type point geographique</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+	<div th:replace="layout::navbar"></div>
+  <h2>Détails d'un type point geographique </h2>
+  <table>
+    <tr>
+      <th>Attribut</th>
+      <th>Valeur</th>
+    </tr>
+    <tr>
+      <td>Nom</td>
+      <td th:text="${tpg.nom}"></td>
+    </tr>
+    <tr>
+      <td>Code</td>
+      <td th:text="${tpg.code}"></td>
+    </tr>
+   <!-- <tr>
+      <td>User create</td>
+      <td th:text="${drone.userCreate}"></td>
+    </tr> -->
+    <tr>
+      <td>Date create</td>
+      <td th:text="${tpg.dateCreate}"></td>
+    </tr>
+  </table>
+</body>
+</html>

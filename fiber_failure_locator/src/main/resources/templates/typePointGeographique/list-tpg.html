@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+<head>
+<meta charset="utf-8">
+<title>Liste des types de point geographique</title>
+</head>
+<body>
+<div th:replace="layout::navbar"></div>
+<div class="container mt-5">
+<div class="card">
+<div class="card-header">
+Liste des types de point geographique
+<br>
+<a th:href="@{/typePointGeographique/showNewTypePointGeographiqueForm}"> Nouveau type de point geographique </a>
+</div>
+<div class="card-body">
+<table class="table table-striped">
+<tr>
+<th>ID</th>
+<th>Nom</th>
+<th>Code</th>
+<th>Actions</th>
+</tr>
+<tr th:each="tpg:${tpgs}">
+<td th:text="${tpg.id}"></td>
+<td th:text="${tpg.nom}"></td>
+<td th:text="${tpg.code}"></td>
+<td> 
+<a th:href="@{/typePointGeographique/showTypePointGeographique/{id}(id=${tpg.id})}">Voir</a>
+<a th:href="@{/typePointGeographique/showTypePointGeographiqueEditFrom/{id}(id=${tpg.id})}">Modifier</a>
+<a th:href="@{/typePointGeographique/deleteTypePointGeographique/{id}(id=${tpg.id})}">Supprimer</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>
