@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+    <title>Modification d'un drone</title>
+</head>
+<body>
+		<div th:replace="layout::navbar"></div>
+    <h2>Modification d'un drone</h2>
+    <form action="#" th:action="@{/drones/updateDrone/{id}(id=${drone.id})}" th:object="${drone}" method="post">
+        
+        <label for="matricule">Matricule:</label>
+        <input type="text" name="matricule" th:value="${drone.matricule}" required>
+        <br>
+        <label for="modele">Modele:</label>
+        <input type="text" name="modele" th:value="${drone.modele}">
+        <br>
+        <button type="submit">Modifier</button>
+    </form>
+</body>
+</html>

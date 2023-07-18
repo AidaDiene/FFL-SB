@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+<head>
+<meta charset="utf-8">
+<title>Liste des Drones</title>
+</head>
+<body>
+<div th:replace="layout::navbar"></div>
+<div class="container mt-5">
+<div class="card">
+<div class="card-header">
+Liste des Drones
+<br>
+<a th:href="@{/drones/showNewDroneForm}"> Nouveau drone </a>
+</div>
+<div class="card-body">
+<table class="table table-striped">
+<tr>
+<th>ID</th>
+<th>Matricule</th>
+<th>Modele</th>
+<th>Actions</th>
+</tr>
+<tr th:each="d:${drones}">
+<td th:text="${d.id}"></td>
+<td th:text="${d.matricule}"></td>
+<td th:text="${d.modele}"></td>
+<td> 
+<a th:href="@{/drones/showDrone/{id}(id=${d.id})}">Voir</a>
+<a th:href="@{/drones/showDroneEditFrom/{id}(id=${d.id})}">Modifier</a>
+<a th:href="@{/drones/deleteDrone/{id}(id=${d.id})}">Supprimer</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

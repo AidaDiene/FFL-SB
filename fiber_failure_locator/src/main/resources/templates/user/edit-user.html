@@ -5,15 +5,20 @@
     <title>Modification d'un utilisateur</title>
 </head>
 <body>
-	<div th:replace="layout::navbar"></div>
     <h2>Modification d'un utilisateur</h2>
-    <form th:action="@{/utilisateurs/updateUser}" th:object="${user}" method="post">
+    <form  action="#" th:action="@{/utilisateurs/updateUser/{id}(id=${user.id})}" th:object="${user}" method="post">
         <input type="hidden" name="id" th:value="${user.id}">
         <label for="prenom">Prénom:</label>
         <input type="text" name="prenom" th:value="${user.prenom}" required>
         <br>
         <label for="nom">Nom:</label>
         <input type="text" name="nom" th:value="${user.nom}" required>
+        <br>
+        <label for="matricule">Matricule:</label>
+        <input type="text" name="matricule" th:value="${user.matricule}" required>
+        <br>
+        <label for="password">password:</label>
+        <input type="text" name="password" th:value="${user.password}" required>
         <br>
         <label for="email">Email:</label>
         <input type="email" name="email" th:value="${user.email}" required>
@@ -22,7 +27,7 @@
         <input type="text" name="telephone" th:value="${user.telephone}">
         <br>
         <label for="isAdmin">Administrateur:</label>
-        <input type="checkbox" name="isAdmin" th:checked="${user.isAdmin}">
+        <input type="checkbox" name="isAdmin" th:value="${user.isAdmin}" th:checked="${user.isAdmin}">
         <br>
         <button type="submit">Modifier</button>
     </form>

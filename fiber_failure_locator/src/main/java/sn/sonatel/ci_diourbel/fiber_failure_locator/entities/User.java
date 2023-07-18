@@ -1,13 +1,15 @@
 package sn.sonatel.ci_diourbel.fiber_failure_locator.entities;
 
 import javax.validation.constraints.NotNull;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 
+@Table(name = "utilisateurs")
 @Entity
 public class User {
 
@@ -15,17 +17,18 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(nullable = false)
-	@NotNull
+	@NotNull(message = "Le prénom ne peut pas être vide")
 	private String prenom;
 	@Column(nullable = false)
-	@NotNull
+	@NotNull(message = "Le prénom ne peut pas être vide")
 	private String nom;
 	@Column(nullable = false, unique = true)
-	@NotNull
+	@NotNull(message = "Le prénom ne peut pas être vide")
 	private String matricule;
 	private String telephone;
 	@Column(nullable = false, unique = true)
-	@NotNull
+	@NotNull(message = "Le prénom ne peut pas être vide")
+    @Email(message = "L'email doit être valide")
 	private String email;
 	@Column(nullable = false)
 	@NotNull

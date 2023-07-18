@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+  <title>Détails d'un drone</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+	<div th:replace="layout::navbar"></div>
+  <h2>Détails d'un drone </h2>
+  <table>
+    <tr>
+      <th>Attribut</th>
+      <th>Valeur</th>
+    </tr>
+    <tr>
+      <td>Matricule</td>
+      <td th:text="${drone.matricule}"></td>
+    </tr>
+    <tr>
+      <td>Modele</td>
+      <td th:text="${drone.modele}"></td>
+    </tr>
+   <!-- <tr>
+      <td>User create</td>
+      <td th:text="${drone.userCreate}"></td>
+    </tr> -->
+    <tr>
+      <td>Date create</td>
+      <td th:text="${drone.dateCreate}"></td>
+    </tr>
+  </table>
+</body>
+</html>

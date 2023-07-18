@@ -13,7 +13,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+@Table(name = "drones")
 @Entity
 public class Drone {
 
@@ -26,10 +28,10 @@ public class Drone {
 	private String modele;
 	@ManyToMany(mappedBy = "drones")
     private List<PointImpact> pointImpacts;
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	@NotNull
-	private User userCreate;
+	//@ManyToOne
+	//@JoinColumn(nullable = false)
+	//@NotNull
+	//private User userCreate;
 	@ManyToOne
 	private User userUpdate;
 	@Column(updatable = false)
@@ -71,14 +73,14 @@ public class Drone {
 		this.modele = modele;
 	}
 
-	public User getUserCreate() {
+/*	public User getUserCreate() {
 		return userCreate;
 	}
 
 	public void setUserCreate(User userCreate) {
 		this.userCreate = userCreate;
 	}
-
+*/
 	public User getUserUpdate() {
 		return userUpdate;
 	}
