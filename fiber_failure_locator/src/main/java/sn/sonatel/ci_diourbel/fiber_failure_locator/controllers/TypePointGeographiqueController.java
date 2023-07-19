@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.Drone;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.TypePointGeographique;
-import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.DroneRepository;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.TypePointGeographiqueRepository;
 
 @Controller

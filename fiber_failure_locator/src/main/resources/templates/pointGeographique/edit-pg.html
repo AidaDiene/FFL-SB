@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+    <title>Modification d'un point geographique</title>
+</head>
+<body>
+		<div th:replace="layout::navbar"></div>
+    <h2>Modification d'un point geographique</h2>
+    <form action="#" th:action="@{/pointGeographique/updatePointGeographique/{id}(id=${pg.id})}" th:object="${pg}" method="post">
+        
+        <label for="nom">Nom:</label>
+        <input type="text" name="nom" th:value="${pg.nom}" required>
+        <br>
+        <label for="latitude">Latitude:</label>
+        <input type="number" name="latitude" th:value="${pg.latitude}">
+        <br>
+        <label for="longitude">Longitude:</label>
+        <input type="number" name="longitude" th:value="${pg.longitude}">
+        <br>
+          <div>
+        <label for="typePointGeographique">Type point geographique :</label>
+        <select id="typePointGeographique" name="typePointGeographique" th:value="${pg.typePointGeographique}">
+            <!-- Remplacer "typesList" par le nom de votre liste de types de points géographiques disponibles -->
+            <option th:each="typePointGeographique : ${tpgList}" th:value="${typePointGeographique.id}" th:text="${typePointGeographique.nom}"></option>
+        </select>
+    	</div>
+      <br>
+        <button type="submit">Modifier</button>
+    </form>
+</body>
+</html>

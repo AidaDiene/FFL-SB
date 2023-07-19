@@ -10,7 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -26,7 +25,7 @@ public class TypePointGeographique {
 	@Column(nullable = false, unique = true)
 	@NotNull
 	private String code;
-	@OneToMany(mappedBy = "type")
+	@OneToMany(mappedBy = "typePointGeographique")
 	private List<PointGeographique> pointGeographiques;
 	//@ManyToOne
 	//@JoinColumn(nullable = false)

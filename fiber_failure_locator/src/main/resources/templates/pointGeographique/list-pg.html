@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+<head>
+<meta charset="utf-8">
+<title>Liste des points geographiques</title>
+</head>
+<body>
+<div th:replace="layout::navbar"></div>
+<div class="container mt-5">
+<div class="card">
+<div class="card-header">
+Liste des points geographiques
+<br>
+<a th:href="@{/pointGeographique/showNewPointGeographiqueForm}"> Nouveau point geographique </a>
+</div>
+<div class="card-body">
+<table class="table table-striped">
+<tr>
+<th>ID</th>
+<th>Nom</th>
+<th>Latitude</th>
+<th>Longitude</th>
+<th>Type point geographique</th>
+<th>Actions</th>
+</tr>
+<tr th:each="pg:${pgs}">
+<td th:text="${pg.id}"></td>
+<td th:text="${pg.nom}"></td>
+<td th:text="${pg.latitude}"></td>
+<td th:text="${pg.longitude}"></td>
+<td th:text="${pg.typePointGeographique}"></td>
+<td> 
+<a th:href="@{/pointGeographique/showPointGeographique/{id}(id=${pg.id})}">Voir</a>
+<a th:href="@{/pointGeographique/showPointGeographiqueEditFrom/{id}(id=${pg.id})}">Modifier</a>
+<a th:href="@{/pointGeographique/deletePointGeographique/{id}(id=${pg.id})}">Supprimer</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

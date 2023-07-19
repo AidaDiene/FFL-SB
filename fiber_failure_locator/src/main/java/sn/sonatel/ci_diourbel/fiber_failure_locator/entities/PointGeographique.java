@@ -13,7 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
 public class PointGeographique {
@@ -33,13 +32,13 @@ public class PointGeographique {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	@NotNull
-	private TypePointGeographique type;
+	private TypePointGeographique typePointGeographique;
 	@ManyToMany(mappedBy = "pointGeographiques")
     private List<Itineraire> itineraires;
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	@NotNull
-	private User userCreate;
+	//@ManyToOne
+	//@JoinColumn(nullable = false)
+	//@NotNull
+	//private User userCreate;
 	@ManyToOne
 	private User userUpdate;
 	@Column(updatable = false)
@@ -51,12 +50,12 @@ public class PointGeographique {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public PointGeographique(String nom, Double latitude, Double longitude, TypePointGeographique type) {
+	public PointGeographique(String nom, Double latitude, Double longitude, TypePointGeographique typePointGeographique) {
 		super();
 		this.nom = nom;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.type = type;
+		this.typePointGeographique = typePointGeographique;
 	}
 	
 	public Long getId() {
@@ -83,18 +82,18 @@ public class PointGeographique {
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	public TypePointGeographique getType() {
-		return type;
+	public TypePointGeographique getTypePointGeographique() {
+		return typePointGeographique;
 	}
-	public void setType(TypePointGeographique type) {
-		this.type = type;
+	public void setTypePointGeographique(TypePointGeographique typePointGeographique) {
+		this.typePointGeographique = typePointGeographique;
 	}
-	public User getUserCreate() {
+/*	public User getUserCreate() {
 		return userCreate;
 	}
 	public void setUserCreate(User userCreate) {
 		this.userCreate = userCreate;
-	}
+	} */
 	public User getUserUpdate() {
 		return userUpdate;
 	}
@@ -116,8 +115,8 @@ public class PointGeographique {
 	
 	@Override
 	public String toString() {
-		return "PointGeographique [nom=" + nom + ", latitude=" + latitude + ", longitude=" + longitude + ", type="
-				+ type + "]";
+		return "PointGeographique [nom=" + nom + ", latitude=" + latitude + ", longitude=" + longitude + ", typePointGeographique="
+				+ typePointGeographique + "]";
 	}
 	
 	
