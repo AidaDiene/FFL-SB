@@ -39,10 +39,10 @@ public class Itineraire {
 	private List<PointGeographique> pointGeographiques = new ArrayList<>();
 	@OneToMany(mappedBy = "itineraire")
 	private List<PointImpact> pointImpact;
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	@NotNull
-	private User userCreate;
+	//@ManyToOne
+	//@JoinColumn(nullable = false)
+	//@NotNull
+	//private User userCreate;
 	@ManyToOne
 	private User userUpdate;
 	@Column(updatable = false)
@@ -110,13 +110,13 @@ public class Itineraire {
 		this.pointGeographiques = pointGeographiques;
 	}
 
-	public User getUserCreate() {
+/*	public User getUserCreate() {
 		return userCreate;
 	}
 
 	public void setUserCreate(User userCreate) {
 		this.userCreate = userCreate;
-	}
+	} */
 
 	public User getUserUpdate() {
 		return userUpdate;

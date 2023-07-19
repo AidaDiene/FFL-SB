@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+    <title>Modification d'une itineraire</title>
+</head>
+<body>
+		<div th:replace="layout::navbar"></div>
+    <h2>Modification d'une itineraire</h2>
+    <form action="#" th:action="@{/itineraires/updateItineraire/{id}(id=${itineraire.id})}" th:object="${itineraire}" method="post">
+        
+        <label for="nom">Nom:</label>
+        <input type="text" name="nom" th:value="${itineraire.nom}" required>
+        <br
+		<div>
+        <label for="depart">Depart :</label>
+        <select id="depart" name="depart">
+            <option th:each="depart : ${pgList}" th:value="${depart.id}" th:text="${depart.nom}" th:selected="${depart.id == itineraire.depart.id}"></option>
+        </select>
+    	</div>
+      <br>
+      	<div>
+        <label for="arrivee">Arrivee :</label>
+        <select id="arrivee" name="arrivee">
+            <option th:each="arrivee : ${pgList}" th:value="${arrivee.id}" th:text="${arrivee.nom}" th:selected="${arrivee.id == itineraire.arrivee.id}"></option>
+        </select>
+    	</div>
+      <br>
+      <div>
+    	<label for="pointGeographiques">Points géographiques :</label>
+    	<select id="pointGeographiques" name="pointGeographiques" multiple>
+        	<option th:each="point : ${pgList}" th:value="${point.id}" th:text="${point.nom}" th:selected="${itineraire.pointGeographiques.contains(point)}"></option>
+    	</select>
+	</div>
+	 <br>
+        <button type="submit">Modifier</button>
+    </form>
+</body>
+</html>

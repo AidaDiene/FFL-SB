@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+  <meta charset="UTF-8">
+  <title>Créer une itineraire</title>
+</head>
+<body>
+	<div th:replace="layout::navbar"></div>
+  <h1>Créer une itineraire</h1>
+  <form th:action="@{/itineraires/saveItineraire}" th:object="${itineraire}" method="post">
+	  
+    <div>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required>
+    </div>
+
+    <div>
+        <label for="depart">Depart :</label>
+        <select id="depart" name="depart" required>
+            <!-- Remplacer "typesList" par le nom de votre liste de types de points géographiques disponibles -->
+            <option th:each="depart : ${pgList}" th:value="${depart.id}" th:text="${depart.nom}"></option>
+        </select>
+    </div>
+    
+     <div>
+        <label for="arrivee">Arrivee :</label>
+        <select id="arrivee" name="arrivee" required>
+            <option th:each="arrivee : ${pgList}" th:value="${arrivee.id}" th:text="${arrivee.nom}"></option>
+        </select>
+    </div>
+
+	<div>
+    	<label for="pointGeographiques">Points géographiques :</label>
+    	<select id="pointGeographiques" name="pointGeographiques" multiple>
+        	<option th:each="point : ${pgList}" th:value="${point.id}" th:text="${point.nom}"></option>
+    	</select>
+	</div>
+
+    <input type="submit" value="Créer">
+  </form>
+</body>
+</html>

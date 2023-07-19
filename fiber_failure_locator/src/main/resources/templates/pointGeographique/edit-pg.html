@@ -20,9 +20,9 @@
         <br>
           <div>
         <label for="typePointGeographique">Type point geographique :</label>
-        <select id="typePointGeographique" name="typePointGeographique" th:value="${pg.typePointGeographique}">
+        <select id="typePointGeographique" name="typePointGeographique">
             <!-- Remplacer "typesList" par le nom de votre liste de types de points géographiques disponibles -->
-            <option th:each="typePointGeographique : ${tpgList}" th:value="${typePointGeographique.id}" th:text="${typePointGeographique.nom}"></option>
+            <option th:each="typePointGeographique : ${tpgList}" th:value="${typePointGeographique.id}" th:text="${typePointGeographique.nom}" th:selected="${typePointGeographique.id == pg.typePointGeographique.id}"></option>
         </select>
     	</div>
       <br>

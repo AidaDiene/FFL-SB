@@ -33,10 +33,10 @@ public class PointImpact {
 	private Itineraire itineraire;
 	@ManyToMany
 	private List<Drone> drones = new ArrayList<>();
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	@NotNull
-	private User user;
+	//@ManyToOne
+	//@JoinColumn(nullable = false)
+	//@NotNull
+	//private User user;
 	@Column(nullable = false)
 	@NotNull
 	private Date dateRecherche;
@@ -53,14 +53,14 @@ public class PointImpact {
 		this.itineraire = itineraire;
 	}
 
-	public PointImpact(Double latitude, Double longitude, Itineraire itineraire, List<Drone> drones, User user,
+	public PointImpact(Double latitude, Double longitude, Itineraire itineraire, List<Drone> drones, /*User user,*/
 			Date dateRecherche) {
 		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.itineraire = itineraire;
 		this.drones = drones;
-		this.user = user;
+		//this.user = user;
 		this.dateRecherche = dateRecherche;
 	}
 
@@ -104,13 +104,13 @@ public class PointImpact {
 		this.drones = drones;
 	}
 
-	public User getUser() {
+/*	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
-	}
+	} */
 
 	public Date getDateRecherche() {
 		return dateRecherche;
@@ -123,7 +123,7 @@ public class PointImpact {
 	@Override
 	public String toString() {
 		return "PointImpact [latitude=" + latitude + ", longitude=" + longitude + ", itineraire=" + itineraire
-				+ ", drones=" + drones + ", user=" + user + ", dateRecherche=" + dateRecherche + "]";
+				+ ", drones=" + drones + ", user=" + /*user + */ ", dateRecherche=" + dateRecherche + "]";
 	} 
 	
 }

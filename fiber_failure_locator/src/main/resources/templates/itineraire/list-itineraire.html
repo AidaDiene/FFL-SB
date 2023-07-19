@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+<head>
+<meta charset="utf-8">
+<title>Liste des itineraires</title>
+</head>
+<body>
+<div th:replace="layout::navbar"></div>
+<div class="container mt-5">
+<div class="card">
+<div class="card-header">
+Liste des itineraire
+<br>
+<a th:href="@{/itineraires/showNewItineraireForm}"> Nouveau itineraire </a>
+</div>
+<div class="card-body">
+<table class="table table-striped">
+<tr>
+<th>ID</th>
+<th>Nom</th>
+<th>Depart</th>
+<th>Arrivee</th>
+<th>Points geographiques</th>
+<th>Actions</th>
+</tr>
+<tr th:each="i:${itineraires}">
+<td th:text="${i.id}"></td>
+<td th:text="${i.nom}"></td>
+<td th:text="${i.depart}"></td>
+<td th:text="${i.arrivee}"></td>
+<td th:text="${i.pointGeographiques}"></td>
+<td> 
+<a th:href="@{/itineraires/showItineraire/{id}(id=${i.id})}">Voir</a>
+<a th:href="@{/itineraires/showItineraireEditFrom/{id}(id=${i.id})}">Modifier</a>
+<a th:href="@{/itineraires/deleteItineraire/{id}(id=${i.id})}">Supprimer</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

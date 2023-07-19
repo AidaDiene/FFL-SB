@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
+  <title>Détails d'une itineraire</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+	<div th:replace="layout::navbar"></div>
+  <h2>Détails d'une itineraire </h2>
+  <table>
+    <tr>
+      <th>Attribut</th>
+      <th>Valeur</th>
+    </tr>
+    <tr>
+      <td>Nom</td>
+      <td th:text="${itineraire.nom}"></td>
+    </tr>
+    <tr>
+      <td>Depart</td>
+      <td th:text="${itineraire.depart}"></td>
+    </tr>
+     <tr>
+      <td>Arrivee</td>
+      <td th:text="${itineraire.arrivee}"></td>
+    </tr>
+      <tr>
+      <td>Points geographiques</td>
+      <td th:text="${itineraire.pointGeographiques}"></td>
+    </tr>
+   <!-- <tr>
+      <td>User create</td>
+      <td th:text="${drone.userCreate}"></td>
+    </tr> -->
+    <tr>
+      <td>Date create</td>
+      <td th:text="${itineraire.dateCreate}"></td>
+    </tr>
+  </table>
+</body>
+</html>
