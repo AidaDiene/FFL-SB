@@ -20,14 +20,14 @@ public class User {
 	@NotNull(message = "Le prénom ne peut pas être vide")
 	private String prenom;
 	@Column(nullable = false)
-	@NotNull(message = "Le prénom ne peut pas être vide")
+	@NotNull(message = "Le nom ne peut pas être vide")
 	private String nom;
 	@Column(nullable = false, unique = true)
-	@NotNull(message = "Le prénom ne peut pas être vide")
+	@NotNull(message = "Le matricule ne peut pas être vide")
 	private String matricule;
 	private String telephone;
 	@Column(nullable = false, unique = true)
-	@NotNull(message = "Le prénom ne peut pas être vide")
+	@NotNull(message = "L'email ne peut pas être vide")
     @Email(message = "L'email doit être valide")
 	private String email;
 	@Column(nullable = false)

@@ -6,4 +6,5 @@ import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.TypePointGeographiq
 
 public interface TypePointGeographiqueRepository extends JpaRepository<TypePointGeographique, Long> {
 
+    TypePointGeographique findByCode(String code);
 }

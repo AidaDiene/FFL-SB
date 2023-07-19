@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.Itineraire;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.PointGeographique;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.TypePointGeographique;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.ItineraireRepository;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.PointGeographiqueRepository;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.TypePointGeographiqueRepository;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.services.PointGeographiqueService;
 
 @Controller
 @RequestMapping("/itineraires")
@@ -26,7 +29,9 @@ public class ItineraireController {
 	@Autowired
 	ItineraireRepository itineraireRepo;
 	@Autowired
-	PointGeographiqueRepository pgRepo;
+	PointGeographiqueService pgService;
+	@Autowired
+	TypePointGeographiqueRepository tpgRepo;
 	
 	@GetMapping("/")
 	public String getAllItineraires(Model model)
@@ -39,8 +44,15 @@ public class ItineraireController {
 	@GetMapping("/showNewItineraireForm")
 	public String showNewItineraireForm(Model model )
 	{
-		List<PointGeographique> pgList = pgRepo.findAll();
-	    model.addAttribute("pgList", pgList);
+		TypePointGeographique typeCental = tpgRepo.findByCode("CENTRAL");
+		TypePointGeographique typeSite = tpgRepo.findByCode("SITE");
+		TypePointGeographique typeChambre = tpgRepo.findByCode("CHAMBRE");
+		List<PointGeographique> centralList = pgService.findByTypePointGeographique(typeCental);
+		List<PointGeographique> siteList = pgService.findByTypePointGeographique(typeSite);
+		List<PointGeographique> chambreList = pgService.findByTypePointGeographique(typeChambre);
+	    model.addAttribute("centralList", centralList);
+	    model.addAttribute("siteList", siteList);
+	    model.addAttribute("chambreList", chambreList);
 	    return "itineraire/new-itineraire";
 	}
 	
@@ -63,8 +75,15 @@ public class ItineraireController {
     public String showItineraireEditFrom(@PathVariable("id") Long id, Model model) {
     	Itineraire itineraire = itineraireRepo.findById(id).orElse(null);
     	model.addAttribute("itineraire", itineraire);
-    	List<PointGeographique> pgList = pgRepo.findAll();
-	    model.addAttribute("pgList", pgList);
+    	TypePointGeographique typeCental = tpgRepo.findByCode("CENTRAL");
+		TypePointGeographique typeSite = tpgRepo.findByCode("SITE");
+		TypePointGeographique typeChambre = tpgRepo.findByCode("CHAMBRE");
+		List<PointGeographique> centralList = pgService.findByTypePointGeographique(typeCental);
+		List<PointGeographique> siteList = pgService.findByTypePointGeographique(typeSite);
+		List<PointGeographique> chambreList = pgService.findByTypePointGeographique(typeChambre);
+	    model.addAttribute("centralList", centralList);
+	    model.addAttribute("siteList", siteList);
+	    model.addAttribute("chambreList", chambreList);
     	return "itineraire/edit-itineraire";
     }
     

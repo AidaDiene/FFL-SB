@@ -9,8 +9,13 @@
 	<div th:replace="layout::navbar"></div>
   <h1>Créer un utilisateur</h1>
   <form action="#" th:action="@{/utilisateurs/saveUser}" th:object="${user}" method="post">
+	 <thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
+    <thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version>
+    
     <label for="prenom">Prénom:</label>
-    <input type="text" id="prenom" name="prenom">
+    <input type="text" id="prenom" name="prenom" field="*{prenom}">
+     <div th:each="e : ${#fields.hasErrors('prenom')}" th:text="${e}">Name
+     Error</div>
 	<br>
 
     <label for="nom">Nom:</label>

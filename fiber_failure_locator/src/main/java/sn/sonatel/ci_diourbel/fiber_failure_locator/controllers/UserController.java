@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
@@ -22,11 +24,16 @@ import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.UserRepository;
 
 @Controller
 @RequestMapping("/utilisateurs")
-public class UserController {
+public class UserController implements WebMvcConfigurer {
 	
 	@Autowired
 	UserRepository userRepo;
 	
+	/* @Override
+	    public void addViewControllers(ViewControllerRegistry registry) {
+	        registry.addViewController("/results").setViewName("results");
+	    }*/
+
 	@GetMapping("/")
 	public String getAllUsers(Model model)
 	{

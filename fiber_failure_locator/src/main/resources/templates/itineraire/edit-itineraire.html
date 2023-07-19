@@ -15,21 +15,21 @@
 		<div>
         <label for="depart">Depart :</label>
         <select id="depart" name="depart">
-            <option th:each="depart : ${pgList}" th:value="${depart.id}" th:text="${depart.nom}" th:selected="${depart.id == itineraire.depart.id}"></option>
+            <option th:each="depart : ${centralList}" th:value="${depart.id}" th:text="${depart.nom}" th:selected="${depart.id == itineraire.depart.id}"></option>
         </select>
     	</div>
       <br>
       	<div>
         <label for="arrivee">Arrivee :</label>
         <select id="arrivee" name="arrivee">
-            <option th:each="arrivee : ${pgList}" th:value="${arrivee.id}" th:text="${arrivee.nom}" th:selected="${arrivee.id == itineraire.arrivee.id}"></option>
+            <option th:each="arrivee : ${siteList}" th:value="${arrivee.id}" th:text="${arrivee.nom}" th:selected="${arrivee.id == itineraire.arrivee.id}"></option>
         </select>
     	</div>
       <br>
       <div>
     	<label for="pointGeographiques">Points géographiques :</label>
     	<select id="pointGeographiques" name="pointGeographiques" multiple>
-        	<option th:each="point : ${pgList}" th:value="${point.id}" th:text="${point.nom}" th:selected="${itineraire.pointGeographiques.contains(point)}"></option>
+        	<option th:each="point : ${chambreList}" th:value="${point.id}" th:text="${point.nom}" th:selected="${itineraire.pointGeographiques.contains(point)}"></option>
     	</select>
 	</div>
 	 <br>
