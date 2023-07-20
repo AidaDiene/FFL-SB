@@ -1,48 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
-<head>
-<meta charset="utf-8">
-<title>Liste des Utilisateurs</title>
+
+<head th:replace="layout::header">
+	<title>Liste des Utilisateurs</title>
 </head>
+
 <body>
-<div th:replace="layout::navbar"></div>
-<div class="container mt-5">
-<div class="card">
-<div class="card-header">
-Liste des Utilisateurs
-<br>
-<a th:href="@{/utilisateurs/showNewUserForm}"> Nouveau utilisateur </a>
-</div>
-<div class="card-body">
-<table class="table table-striped">
-<tr>
-<th>ID</th>
-<th>Prenom</th>
-<th>Nom</th>
-<th>Matricule</th>
-<th>Email</th>
-<th>Telephone</th>
-<th>Admin</th>
-<th>Actions</th>
-</tr>
-<tr th:each="u:${users}">
-<td th:text="${u.id}"></td>
-<td th:text="${u.prenom}"></td>
-<td th:text="${u.nom}"></td>
-<td th:text="${u.matricule}"></td>
-<td th:text="${u.email}"></td>
-<td th:text="${u.telephone}"></td>
-<td th:text="${u.admin}"></td>
-<td> 
-<a th:href="@{/utilisateurs/showUser/{id}(id=${u.id})}">Voir</a>
-<a th:href="@{/utilisateurs/showUserEditFrom/{id}(id=${u.id})}">Modifier</a>
-<a th:href="@{/utilisateurs/deleteUser/{id}(id=${u.id})}">Supprimer</a>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<div th:replace="layout::Sidebar"></div>
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<div th:replace="layout::Topbar"></div>
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-2 text-gray-800">Tables</h1>
+					<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+						For more information about DataTables, please visit the <a target="_blank"
+							href="https://datatables.net">official DataTables documentation</a>.</p>
+
+					<!-- DataTales Example -->
+					<div class="card shadow mb-4">
+						<div class="card-header py-3">
+							<h4 class="m-0 font-weight-bold text-primary">Liste des Utilisateurs</h4>
+							<h6><a th:href="@{/utilisateurs/showNewUserForm}"> Nouveau utilisateur </a></h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Prenom</th>
+											<th>Nom</th>
+											<th>Matricule</th>
+											<th>Email</th>
+											<th>Telephone</th>
+											<th>Admin</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>ID</th>
+											<th>Prenom</th>
+											<th>Nom</th>
+											<th>Matricule</th>
+											<th>Email</th>
+											<th>Telephone</th>
+											<th>Admin</th>
+											<th>Actions</th>
+										</tr>
+									</tfoot>
+									<tbody>
+										<tr th:each="u:${users}">
+											<td th:text="${u.id}"></td>
+											<td th:text="${u.prenom}"></td>
+											<td th:text="${u.nom}"></td>
+											<td th:text="${u.matricule}"></td>
+											<td th:text="${u.email}"></td>
+											<td th:text="${u.telephone}"></td>
+											<td th:text="${u.admin}"></td>
+											<td>
+												<a th:href="@{/utilisateurs/showUser/{id}(id=${u.id})}">Voir</a>
+												<a
+													th:href="@{/utilisateurs/showUserEditFrom/{id}(id=${u.id})}">Modifier</a>
+												<a th:href="@{/utilisateurs/deleteUser/{id}(id=${u.id})}">Supprimer</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<div th:replace="layout::Footer"></div>
+
+		</div>
+		<!-- End of Content Wrapper -->
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<div th:replace="layout::ScrollButtonAndLogoutModal"></div>
+
+	<!-- Page level plugins -->
+	<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+	<!-- Page level custom scripts -->
+	<script th:src="@{/js/demo/datatables-demo.js}"></script>
+
 </body>
+
 </html>

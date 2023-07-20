@@ -1,40 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
-<head>
-<meta charset="utf-8">
-<title>Liste des types de point geographique</title>
+
+<head th:replace="layout::header">
+	<title>Liste des types de point geographique</title>
 </head>
+
 <body>
-<div th:replace="layout::navbar"></div>
-<div class="container mt-5">
-<div class="card">
-<div class="card-header">
-Liste des types de point geographique
-<br>
-<a th:href="@{/typePointGeographique/showNewTypePointGeographiqueForm}"> Nouveau type de point geographique </a>
-</div>
-<div class="card-body">
-<table class="table table-striped">
-<tr>
-<th>ID</th>
-<th>Nom</th>
-<th>Code</th>
-<th>Actions</th>
-</tr>
-<tr th:each="tpg:${tpgs}">
-<td th:text="${tpg.id}"></td>
-<td th:text="${tpg.nom}"></td>
-<td th:text="${tpg.code}"></td>
-<td> 
-<a th:href="@{/typePointGeographique/showTypePointGeographique/{id}(id=${tpg.id})}">Voir</a>
-<a th:href="@{/typePointGeographique/showTypePointGeographiqueEditFrom/{id}(id=${tpg.id})}">Modifier</a>
-<a th:href="@{/typePointGeographique/deleteTypePointGeographique/{id}(id=${tpg.id})}">Supprimer</a>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<div th:replace="layout::Sidebar"></div>
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<div th:replace="layout::Topbar"></div>
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-2 text-gray-800">Tables</h1>
+					<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+						For more information about DataTables, please visit the <a target="_blank"
+							href="https://datatables.net">official DataTables documentation</a>.</p>
+
+					<!-- DataTales Example -->
+					<div class="card shadow mb-4">
+						<div class="card-header py-3">
+							<h4 class="m-0 font-weight-bold text-primary">Liste des types de point geographique</h4>
+							<h6><a th:href="@{/typePointGeographique/showNewTypePointGeographiqueForm}"> Nouveau type de
+									point geographique </a></h6>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Nom</th>
+											<th>Code</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>ID</th>
+											<th>Nom</th>
+											<th>Code</th>
+											<th>Actions</th>
+										</tr>
+									</tfoot>
+									<tbody>
+										<tr th:each="tpg:${tpgs}">
+											<td th:text="${tpg.id}"></td>
+											<td th:text="${tpg.nom}"></td>
+											<td th:text="${tpg.code}"></td>
+											<td>
+												<a
+													th:href="@{/typePointGeographique/showTypePointGeographique/{id}(id=${tpg.id})}">Voir</a>
+												<a
+													th:href="@{/typePointGeographique/showTypePointGeographiqueEditFrom/{id}(id=${tpg.id})}">Modifier</a>
+												<a
+													th:href="@{/typePointGeographique/deleteTypePointGeographique/{id}(id=${tpg.id})}">Supprimer</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<div th:replace="layout::Footer"></div>
+
+		</div>
+		<!-- End of Content Wrapper -->
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<div th:replace="layout::ScrollButtonAndLogoutModal"></div>
+
+	<!-- Page level plugins -->
+	<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+	<!-- Page level custom scripts -->
+	<script th:src="@{/js/demo/datatables-demo.js}"></script>
+
 </body>
+
 </html>

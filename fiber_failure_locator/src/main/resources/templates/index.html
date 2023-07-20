@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::header">
+	<title>Bienvenue</title>
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+	<div id="wrapper">
+		<div th:replace="layout::Sidebar"></div>
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<div th:replace="layout::Topbar"></div>
+
+				<!-- Begin Page Content -->
+		
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<div th:replace="layout::Footer"></div>
+
+		</div>
+		<!-- End of Content Wrapper -->
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<div th:replace="layout::ScrollButtonAndLogoutModal"></div>
+
+   
+</body>
+
+</html>

@@ -18,7 +18,6 @@ import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.Itineraire;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.PointGeographique;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.TypePointGeographique;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.ItineraireRepository;
-import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.PointGeographiqueRepository;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.TypePointGeographiqueRepository;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.services.PointGeographiqueService;
 

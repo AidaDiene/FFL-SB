@@ -1,39 +1,115 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
-    <title>Modification d'une itineraire</title>
+
+<head th:replace="layout::header">
+	<title>Modification d'une itineraire</title>
 </head>
+
 <body>
-		<div th:replace="layout::navbar"></div>
-    <h2>Modification d'une itineraire</h2>
-    <form action="#" th:action="@{/itineraires/updateItineraire/{id}(id=${itineraire.id})}" th:object="${itineraire}" method="post">
-        
-        <label for="nom">Nom:</label>
-        <input type="text" name="nom" th:value="${itineraire.nom}" required>
-        <br
-		<div>
-        <label for="depart">Depart :</label>
-        <select id="depart" name="depart">
-            <option th:each="depart : ${centralList}" th:value="${depart.id}" th:text="${depart.nom}" th:selected="${depart.id == itineraire.depart.id}"></option>
-        </select>
-    	</div>
-      <br>
-      	<div>
-        <label for="arrivee">Arrivee :</label>
-        <select id="arrivee" name="arrivee">
-            <option th:each="arrivee : ${siteList}" th:value="${arrivee.id}" th:text="${arrivee.nom}" th:selected="${arrivee.id == itineraire.arrivee.id}"></option>
-        </select>
-    	</div>
-      <br>
-      <div>
-    	<label for="pointGeographiques">Points géographiques :</label>
-    	<select id="pointGeographiques" name="pointGeographiques" multiple>
-        	<option th:each="point : ${chambreList}" th:value="${point.id}" th:text="${point.nom}" th:selected="${itineraire.pointGeographiques.contains(point)}"></option>
-    	</select>
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<div th:replace="layout::Sidebar"></div>
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<div th:replace="layout::Topbar"></div>
+
+				<!-- Begin Page Content -->
+
+				<div class="container">
+
+					<!-- Outer Row -->
+					<div class="row justify-content-center">
+
+						<div class="col-xl-12 col-lg-10 col-md-9">
+
+							<div class="card o-hidden border-0 shadow-lg my-5">
+								<div class="card-body p-0">
+									<!-- Nested Row within Card Body -->
+									<div class="row justify-content-center">
+										<div class="col-lg-9">
+											<div class="p-5">
+												<div class="text-center">
+													<h1 class="h4 text-gray-900 mb-4">Modification d'une itineraire</h1>
+												</div>
+
+												<form action="#"
+													th:action="@{/itineraires/updateItineraire/{id}(id=${itineraire.id})}"
+													th:object="${itineraire}" method="post" class="user">
+
+													<div class="form-group">
+														<input type="text" name="nom" th:value="${itineraire.nom}"
+															placeholder="Nom" class="form-control form-control-user">
+													</div>
+													<br>
+													<div>
+														<label for="depart">Depart :</label>
+														<select id="depart" name="depart">
+															<option th:each="depart : ${centralList}"
+																th:value="${depart.id}" th:text="${depart.nom}"
+																th:selected="${depart.id == itineraire.depart.id}">
+															</option>
+														</select>
+													</div>
+													<br>
+													<div>
+														<label for="arrivee">Arrivee :</label>
+														<select id="arrivee" name="arrivee">
+															<option th:each="arrivee : ${siteList}"
+																th:value="${arrivee.id}" th:text="${arrivee.nom}"
+																th:selected="${arrivee.id == itineraire.arrivee.id}">
+															</option>
+														</select>
+													</div>
+													<br>
+													<div>
+														<label for="pointGeographiques">Points géographiques :</label>
+														<select id="pointGeographiques" name="pointGeographiques"
+															multiple>
+															<option th:each="point : ${chambreList}"
+																th:value="${point.id}" th:text="${point.nom}"
+																th:selected="${itineraire.pointGeographiques.contains(point)}">
+															</option>
+														</select>
+													</div>
+													<br>
+													<div class="row justify-content-center">
+														<button class="btn btn-primary btn-user btn-block col-sm-3"
+															type="submit">Modifier</button>
+													</div>
+												</form>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<div th:replace="layout::Footer"></div>
+
+		</div>
+		<!-- End of Content Wrapper -->
 	</div>
-	 <br>
-        <button type="submit">Modifier</button>
-    </form>
+	<!-- End of Page Wrapper -->
+
+	<div th:replace="layout::ScrollButtonAndLogoutModal"></div>
+
+
 </body>
+
 </html>

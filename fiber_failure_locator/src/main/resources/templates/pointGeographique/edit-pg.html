@@ -1,32 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	    <link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
-    <title>Modification d'un point geographique</title>
+
+<head th:replace="layout::header">
+	<title>Modification d'un point geographique</title>
 </head>
+
 <body>
-		<div th:replace="layout::navbar"></div>
-    <h2>Modification d'un point geographique</h2>
-    <form action="#" th:action="@{/pointGeographique/updatePointGeographique/{id}(id=${pg.id})}" th:object="${pg}" method="post">
-        
-        <label for="nom">Nom:</label>
-        <input type="text" name="nom" th:value="${pg.nom}" required>
-        <br>
-        <label for="latitude">Latitude:</label>
-        <input type="number" name="latitude" th:value="${pg.latitude}">
-        <br>
-        <label for="longitude">Longitude:</label>
-        <input type="number" name="longitude" th:value="${pg.longitude}">
-        <br>
-          <div>
-        <label for="typePointGeographique">Type point geographique :</label>
-        <select id="typePointGeographique" name="typePointGeographique">
-            <!-- Remplacer "typesList" par le nom de votre liste de types de points géographiques disponibles -->
-            <option th:each="typePointGeographique : ${tpgList}" th:value="${typePointGeographique.id}" th:text="${typePointGeographique.nom}" th:selected="${typePointGeographique.id == pg.typePointGeographique.id}"></option>
-        </select>
-    	</div>
-      <br>
-        <button type="submit">Modifier</button>
-    </form>
+
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<div th:replace="layout::Sidebar"></div>
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<div th:replace="layout::Topbar"></div>
+
+				<!-- Begin Page Content -->
+
+				<div class="container">
+
+					<!-- Outer Row -->
+					<div class="row justify-content-center">
+
+						<div class="col-xl-12 col-lg-10 col-md-9">
+
+							<div class="card o-hidden border-0 shadow-lg my-5">
+								<div class="card-body p-0">
+									<!-- Nested Row within Card Body -->
+									<div class="row justify-content-center">
+										<div class="col-lg-9">
+											<div class="p-5">
+												<div class="text-center">
+													<h1 class="h4 text-gray-900 mb-4">Modification d'un point
+														geographique</h1>
+												</div>
+
+												<form action="#"
+													th:action="@{/pointGeographique/updatePointGeographique/{id}(id=${pg.id})}"
+													th:object="${pg}" method="post" class="user">
+
+													<div class="form-group">
+														<input type="text" name="nom" placeholder="Nom"
+															th:value="${pg.nom}" class="form-control form-control-user">
+													</div>
+													<br>
+													<div class="form-group">
+														<input type="number" name="latitude" placeholder="Latitude"
+															th:value="${pg.latitude}"
+															class="form-control form-control-user">
+													</div>
+													<br>
+													<div class="form-group">
+														<input type="number" name="longitude" th:value="${pg.longitude}"
+															placeholder="Longitude"
+															class="form-control form-control-user">
+													</div>
+													<br>
+													<div>
+														<label for="typePointGeographique">Type point geographique
+															:</label>
+														<select id="typePointGeographique" name="typePointGeographique">
+															<!-- Remplacer "typesList" par le nom de votre liste de types de points géographiques disponibles -->
+															<option th:each="typePointGeographique : ${tpgList}"
+																th:value="${typePointGeographique.id}"
+																th:text="${typePointGeographique.nom}"
+																th:selected="${typePointGeographique.id == pg.typePointGeographique.id}">
+															</option>
+														</select>
+													</div>
+													<br>
+													<div class="row justify-content-center">
+														<button class="btn btn-primary btn-user btn-block col-sm-3"
+															type="submit">Modifier</button>
+													</div>
+												</form>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<div th:replace="layout::Footer"></div>
+
+		</div>
+		<!-- End of Content Wrapper -->
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<div th:replace="layout::ScrollButtonAndLogoutModal"></div>
+
+
 </body>
+
 </html>

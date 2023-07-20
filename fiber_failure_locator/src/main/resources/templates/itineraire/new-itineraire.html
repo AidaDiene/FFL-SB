@@ -1,43 +1,113 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" th:href="@{/bootstrap.min.css}" />
-  <meta charset="UTF-8">
-  <title>Créer une itineraire</title>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout::header">
+	<title>Créer une itineraire</title>
 </head>
+
 <body>
-	<div th:replace="layout::navbar"></div>
-  <h1>Créer une itineraire</h1>
-  <form th:action="@{/itineraires/saveItineraire}" th:object="${itineraire}" method="post">
-	  
-    <div>
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" required>
-    </div>
 
-    <div>
-        <label for="depart">Depart :</label>
-        <select id="depart" name="depart" required>
-            <!-- Remplacer "typesList" par le nom de votre liste de types de points géographiques disponibles -->
-            <option th:each="depart : ${centralList}" th:value="${depart.id}" th:text="${depart.nom}"></option>
-        </select>
-    </div>
-    
-     <div>
-        <label for="arrivee">Arrivee :</label>
-        <select id="arrivee" name="arrivee" required>
-            <option th:each="arrivee : ${siteList}" th:value="${arrivee.id}" th:text="${arrivee.nom}"></option>
-        </select>
-    </div>
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<div th:replace="layout::Sidebar"></div>
 
-	<div>
-    	<label for="pointGeographiques">Points géographiques :</label>
-    	<select id="pointGeographiques" name="pointGeographiques" multiple>
-        	<option th:each="point : ${chambreList}" th:value="${point.id}" th:text="${point.nom}"></option>
-    	</select>
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<div th:replace="layout::Topbar"></div>
+
+				<!-- Begin Page Content -->
+
+				<div class="container">
+
+					<!-- Outer Row -->
+					<div class="row justify-content-center">
+
+						<div class="col-xl-12 col-lg-10 col-md-10">
+
+							<div class="card o-hidden border-0 shadow-lg my-5">
+								<div class="card-body p-0">
+									<!-- Nested Row within Card Body -->
+									<div class="row justify-content-center">
+										<div class="col-lg-12">
+											<div class="p-5">
+												<div class="text-center">
+													<h1 class="h4 text-gray-900 mb-4">Nouveau itineraire</h1>
+												</div>
+												<form th:action="@{/itineraires/saveItineraire}"
+													th:object="${itineraire}" method="post" class="user">
+
+													<div class="form-group">
+														<input type="text" id="nom" name="nom" placeholder="Nom"
+															class="form-control form-control-user">
+													</div>
+
+													<div class="form-group">
+														<select id="depart" name="depart"
+															class="form-control form-control-user">
+															<!-- Remplacer "typesList" par le nom de votre liste de types de points géographiques disponibles -->
+															<option>Choisir le central de depart</option>
+															<option th:each="depart : ${centralList}"
+																th:value="${depart.id}" th:text="${depart.nom}">
+															</option>
+														</select>
+													</div>
+
+													<div class="form-group">
+														<select id="arrivee" name="arrivee"
+															class="form-control form-control-user">
+															<option>Choisir le site de destination</option>
+															<option th:each="arrivee : ${siteList}"
+																th:value="${arrivee.id}" th:text="${arrivee.nom}">
+															</option>
+														</select>
+													</div>
+
+													<div class="form-group">
+														<select id="pointGeographiques" name="pointGeographiques"
+															multiple class="form-control form-control-user">
+															<option>Selectionner les points geographiques de
+																l'itineraire</option>
+															<option th:each="point : ${chambreList}"
+																th:value="${point.id}" th:text="${point.nom}"></option>
+														</select>
+													</div>
+
+													<div class="row justify-content-center">
+
+														<input type="submit" value="Créer"
+															class="btn btn-primary btn-user btn-block col-sm-3">
+													</div>
+												</form>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<div th:replace="layout::Footer"></div>
+
+		</div>
+		<!-- End of Content Wrapper -->
 	</div>
+	<!-- End of Page Wrapper -->
 
-    <input type="submit" value="Créer">
-  </form>
+	<div th:replace="layout::ScrollButtonAndLogoutModal"></div>
+
 </body>
+
 </html>

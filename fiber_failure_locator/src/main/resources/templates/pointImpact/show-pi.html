@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout::header">
+	<title>Détails d'une itineraire</title>
+</head>
+
+<body>
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<div th:replace="layout::Sidebar"></div>
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<div th:replace="layout::Topbar"></div>
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+					<!-- DataTales Example -->
+					<div class="card shadow mb-4">
+						<div class="card-body">
+							<div class="table-responsive">
+								<h2>Détails d'une itineraire </h2>
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+									<tr>
+										<th>Attribut</th>
+										<th>Valeur</th>
+									</tr>
+									<tr>
+										<td>Latitude</td>
+										<td th:text="${pi.latitude}"></td>
+									</tr>
+									<tr>
+										<td>Longitude</td>
+										<td th:text="${pi.longitude}"></td>
+									</tr>
+									<tr>
+										<td>Itineraire</td>
+										<td th:text="${pi.itineraire}"></td>
+									</tr>
+									<tr>
+										<td>List des drones</td>
+										<td th:text="${pi.drones}"></td>
+									</tr>
+									<!-- <tr>
+      <td>User create</td>
+      <td th:text="${drone.userCreate}"></td>
+    </tr> -->
+									<tr>
+										<td>Date Recherche</td>
+										<td th:text="${pi.dateRecherche}"></td>
+									</tr>
+								</table>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<div th:replace="layout::Footer"></div>
+
+		</div>
+		<!-- End of Content Wrapper -->
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<div th:replace="layout::ScrollButtonAndLogoutModal"></div>
+
+	<!-- Page level plugins -->
+	<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+	<!-- Page level custom scripts -->
+	<script th:src="@{/js/demo/datatables-demo.js}"></script>
+
+</body>
+
+</html>
