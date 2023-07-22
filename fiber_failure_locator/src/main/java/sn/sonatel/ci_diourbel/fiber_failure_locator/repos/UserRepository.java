@@ -6,4 +6,5 @@ import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	User findByEmail(String email);
 }
