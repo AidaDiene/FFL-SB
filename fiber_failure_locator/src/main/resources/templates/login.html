@@ -41,13 +41,13 @@
 										<h1 class="h4 text-gray-900 mb-4">Connexion</h1>
 									</div>
 									<form action="#" th:action="@{/login}" method="post" class="user">
-										<div th:if="${error}" class="alert alert-dismissible alert-danger">
-											<strong th:text="${error}"></strong>
+										<div th:if="${param.error}" class="alert alert-dismissible alert-danger">
+											<strong>Email ou mot de passe incorrecte !</strong>
 										</div>
 										<br>
 										<div class="form-group">
-											<input type="email" name="email" class="form-control form-control-user"
-												id="exampleInputEmail" aria-describedby="emailHelp"
+											<input type="email" name="username" class="form-control form-control-user"
+												id="username" aria-describedby="username"
 												placeholder="Enter Email Address...">
 										</div>
 										<div class="form-group">
@@ -81,16 +81,17 @@
 
 	</div>
 
-	<!-- Bootstrap core JavaScript-->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <!-- Inclure jQuery -->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 
-	<!-- Core plugin JavaScript-->
-	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Inclure Bootstrap JavaScript et les scripts bundle -->
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
-	<!-- Custom scripts for all pages-->
-	<script src="js/sb-admin-2.min.js"></script>
+    <!-- Inclure jQuery Easing -->
+    <script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
 
+    <!-- Inclure votre script personnalisé -->
+    <script th:src="@{/js/sb-admin-2.min.js}"></script>
 </body>
 
 </html>
