@@ -33,15 +33,19 @@ public class User {
 	@Column(nullable = false)
 	@NotNull
 	private String password;
+	@Column(nullable = false)
 	private boolean isAdmin;
-	
+	@Column(nullable = false)
+	private boolean enabled;
+	private String photo;
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
 	public User(String prenom, String nom, String matricule, String telephone, String email, String password,
-			boolean isAdmin) {
+			boolean isAdmin, boolean enabled) {
 		super();
 		this.prenom = prenom;
 		this.nom = nom;
@@ -50,6 +54,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.isAdmin = isAdmin;
+		this.enabled = enabled;
 	}
 
 	public Long getId() {
@@ -101,10 +106,27 @@ public class User {
 		this.isAdmin = isAdmin;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
 	@Override
 	public String toString() {
 		return "User [prenom=" + prenom + ", nom=" + nom + ", matricule=" + matricule + ", telephone=" + telephone
-				+ ", email=" + email + ", password=" + password + ", isAdmin=" + isAdmin + "]";
+				+ ", email=" + email + ", password=" + password + ", isAdmin=" + isAdmin + ", enabled=" + enabled + "]";
 	}
+
 	
 }

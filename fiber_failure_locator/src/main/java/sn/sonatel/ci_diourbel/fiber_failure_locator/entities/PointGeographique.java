@@ -35,13 +35,13 @@ public class PointGeographique {
 	private TypePointGeographique typePointGeographique;
 	@ManyToMany(mappedBy = "pointGeographiques")
     private List<Itineraire> itineraires;
-	//@ManyToOne
-	//@JoinColumn(nullable = false)
-	//@NotNull
-	//private User userCreate;
+	@ManyToOne
+	@JoinColumn(nullable = false, updatable = false)
+	@NotNull
+	private User userCreate;
 	@ManyToOne
 	private User userUpdate;
-	@Column(updatable = false)
+	@Column(nullable = false, updatable = false)
 	private Date dateCreate; 
 	private Date dateUpdate;
 	
@@ -88,12 +88,12 @@ public class PointGeographique {
 	public void setTypePointGeographique(TypePointGeographique typePointGeographique) {
 		this.typePointGeographique = typePointGeographique;
 	}
-/*	public User getUserCreate() {
+	public User getUserCreate() {
 		return userCreate;
 	}
 	public void setUserCreate(User userCreate) {
 		this.userCreate = userCreate;
-	} */
+	} 
 	public User getUserUpdate() {
 		return userUpdate;
 	}

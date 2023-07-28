@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -27,13 +28,13 @@ public class Drone {
 	private String modele;
 	@ManyToMany(mappedBy = "drones")
     private List<PointImpact> pointImpacts;
-	//@ManyToOne
-	//@JoinColumn(nullable = false)
-	//@NotNull
-	//private User userCreate;
+	@ManyToOne
+	@JoinColumn(nullable = false, updatable = false)
+	@NotNull
+	private User userCreate;
 	@ManyToOne
 	private User userUpdate;
-	@Column(updatable = false)
+	@Column(nullable = false, updatable = false)
 	private Date dateCreate; 
 	private Date dateUpdate;
 	
@@ -72,14 +73,14 @@ public class Drone {
 		this.modele = modele;
 	}
 
-/*	public User getUserCreate() {
+	public User getUserCreate() {
 		return userCreate;
 	}
 
 	public void setUserCreate(User userCreate) {
 		this.userCreate = userCreate;
 	}
-*/
+
 	public User getUserUpdate() {
 		return userUpdate;
 	}

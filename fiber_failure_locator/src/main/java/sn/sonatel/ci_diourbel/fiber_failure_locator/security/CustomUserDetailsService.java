@@ -22,10 +22,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 		User user = userRepository.findByEmail(username);
 
 		if (user == null) {
-			throw new UsernameNotFoundException("Utilisateur non trouvé");
+			throw new UsernameNotFoundException("Utilisateur non trouvé !");
 		}
 		if (user.isAdmin() == false) {
-			throw new UsernameNotFoundException("Cet utilisateur n'a pas l'acces admin");
+			throw new UsernameNotFoundException("Cet utilisateur n'a pas l'acces admin !");
+		}
+		if (user.isEnabled() == false) {
+			throw new UsernameNotFoundException("Ce compte est desactivé !");
 		}
 
 		return new CustomUserDetails(

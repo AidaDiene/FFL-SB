@@ -1,5 +1,7 @@
 package sn.sonatel.ci_diourbel.fiber_failure_locator.controllers;
 
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.PointGeographique;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.TypePointGeographique;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.User;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.PointGeographiqueRepository;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.TypePointGeographiqueRepository;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.UserRepository;
 
 @Controller
 @RequestMapping("/pointGeographique")
@@ -27,6 +31,8 @@ public class PointGeographiqueController {
 	PointGeographiqueRepository pgRepo;
 	@Autowired
 	TypePointGeographiqueRepository tpgRepo;
+	@Autowired
+	UserRepository userRepo;
 	
 	@GetMapping("/")
 	public String getAllPointGeographique(Model model)
@@ -45,8 +51,11 @@ public class PointGeographiqueController {
 	}
 	
 	@PostMapping("/savePointGeographique")
-	public String savePointGeographique(@ModelAttribute("point_geographique") PointGeographique pg)
+	public String savePointGeographique(@ModelAttribute("point_geographique") PointGeographique pg, Principal principal)
 	{
+		User userCreate = userRepo.findByEmail(principal.getName());
+		pg.setUserCreate(userCreate);
+		pg.setDateCreate(new Date());
 		pgRepo.save(pg);
 		return "redirect:/pointGeographique/"; 
 	}
@@ -69,12 +78,15 @@ public class PointGeographiqueController {
     }
     
     @PostMapping("/updatePointGeographique/{id}")
-	public String updatePointGeographique(@PathVariable("id") long id, @Valid PointGeographique pg, BindingResult result)
+	public String updatePointGeographique(@PathVariable("id") long id, @Valid PointGeographique pg, BindingResult result, Principal principal)
 	{
     	if (result.hasErrors()) {
             pg.setId(id);
             return "pointGeographique/edit-pg";
         }
+    	User userUpdate = userRepo.findByEmail(principal.getName());
+		pg.setUserUpdate(userUpdate);
+		pg.setDateUpdate(new Date());
     	pgRepo.save(pg);
 		return "redirect:/pointGeographique/"; 
 	}

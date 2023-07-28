@@ -1,5 +1,7 @@
 package sn.sonatel.ci_diourbel.fiber_failure_locator.controllers;
 
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.TypePointGeographique;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.User;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.TypePointGeographiqueRepository;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.UserRepository;
 
 @Controller
 @RequestMapping("/typePointGeographique")
@@ -23,6 +27,8 @@ public class TypePointGeographiqueController {
 
 	@Autowired
 	TypePointGeographiqueRepository tpgRepo;
+	@Autowired
+	UserRepository userRepo;
 	
 	@GetMapping("/")
 	public String getAllTypePointGeographique(Model model)
@@ -39,8 +45,11 @@ public class TypePointGeographiqueController {
 	}
 	
 	@PostMapping("/saveTypePointGeographique")
-	public String saveTypePointGeographique(@ModelAttribute("type_point_geographique") TypePointGeographique tpg)
+	public String saveTypePointGeographique(@ModelAttribute("type_point_geographique") TypePointGeographique tpg, Principal principal)
 	{
+		User userCreate = userRepo.findByEmail(principal.getName());
+		tpg.setUserCreate(userCreate);
+		tpg.setDateCreate(new Date());
 		tpgRepo.save(tpg);
 		return "redirect:/typePointGeographique/"; 
 	}
@@ -61,12 +70,15 @@ public class TypePointGeographiqueController {
     }
     
     @PostMapping("/updateTypePointGeographique/{id}")
-	public String updateTypePointGeographique(@PathVariable("id") long id, @Valid TypePointGeographique tpg, BindingResult result)
+	public String updateTypePointGeographique(@PathVariable("id") long id, @Valid TypePointGeographique tpg, BindingResult result, Principal principal)
 	{
     	if (result.hasErrors()) {
             tpg.setId(id);
             return "typePointGeographique/edit-tpg";
         }
+    	User userUpdate = userRepo.findByEmail(principal.getName());
+    	tpg.setUserUpdate(userUpdate);
+    	tpg.setDateUpdate(new Date());
     	tpgRepo.save(tpg);
 		return "redirect:/typePointGeographique/"; 
 	}

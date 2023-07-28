@@ -33,11 +33,11 @@ public class PointImpact {
 	private Itineraire itineraire;
 	@ManyToMany
 	private List<Drone> drones = new ArrayList<>();
-	//@ManyToOne
-	//@JoinColumn(nullable = false)
-	//@NotNull
-	//private User user;
-	@Column(nullable = false)
+	@ManyToOne
+	@JoinColumn(nullable = false, updatable = false)
+	@NotNull
+	private User user;
+	@Column(nullable = false, updatable = false)
 	@NotNull
 	private Date dateRecherche;
 	
@@ -104,13 +104,13 @@ public class PointImpact {
 		this.drones = drones;
 	}
 
-/*	public User getUser() {
+	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
-	} */
+	} 
 
 	public Date getDateRecherche() {
 		return dateRecherche;

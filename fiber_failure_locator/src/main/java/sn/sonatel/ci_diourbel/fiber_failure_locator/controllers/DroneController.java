@@ -1,9 +1,8 @@
 package sn.sonatel.ci_diourbel.fiber_failure_locator.controllers;
 
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.Drone;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.User;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.DroneRepository;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.UserRepository;
 
 @Controller
 @RequestMapping("/drones")
@@ -23,6 +24,8 @@ public class DroneController {
 
 	@Autowired
 	DroneRepository droneRepo;
+	@Autowired
+	UserRepository userRepo;
 	
 	@GetMapping("/")
 	public String getAllDrones(Model model)
@@ -39,8 +42,11 @@ public class DroneController {
 	}
 	
 	@PostMapping("/saveDrone")
-	public String saveUser(@ModelAttribute("drone") Drone drone)
+	public String saveDrone(@ModelAttribute("drone") Drone drone, Principal principal)
 	{
+		User userCreate = userRepo.findByEmail(principal.getName());
+		drone.setUserCreate(userCreate);
+		drone.setDateCreate(new Date());
 		droneRepo.save(drone);
 		return "redirect:/drones/"; 
 	}
@@ -61,12 +67,15 @@ public class DroneController {
     }
     
     @PostMapping("/updateDrone/{id}")
-	public String updateDrone(@PathVariable("id") long id, @Valid Drone drone, BindingResult result)
+	public String updateDrone(@PathVariable("id") long id, Drone drone, BindingResult result, Principal principal)
 	{
     	if (result.hasErrors()) {
             drone.setId(id);
             return "drone/edit-drone";
         }
+    	User userUpdate = userRepo.findByEmail(principal.getName());
+		drone.setUserUpdate(userUpdate);
+		drone.setDateUpdate(new Date());
     	droneRepo.save(drone);
 		return "redirect:/drones/"; 
 	}

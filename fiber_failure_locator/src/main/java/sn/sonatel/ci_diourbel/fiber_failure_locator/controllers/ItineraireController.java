@@ -1,5 +1,7 @@
 package sn.sonatel.ci_diourbel.fiber_failure_locator.controllers;
 
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.Itineraire;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.PointGeographique;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.TypePointGeographique;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.User;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.ItineraireRepository;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.TypePointGeographiqueRepository;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.UserRepository;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.services.PointGeographiqueService;
 
 @Controller
@@ -31,6 +35,8 @@ public class ItineraireController {
 	PointGeographiqueService pgService;
 	@Autowired
 	TypePointGeographiqueRepository tpgRepo;
+	@Autowired
+	UserRepository userRepo;
 	
 	@GetMapping("/")
 	public String getAllItineraires(Model model)
@@ -56,8 +62,11 @@ public class ItineraireController {
 	}
 	
 	@PostMapping("/saveItineraire")
-	public String saveItineraire(@ModelAttribute("itineraire") Itineraire itineraire)
+	public String saveItineraire(@ModelAttribute("itineraire") Itineraire itineraire, Principal principal)
 	{
+		User userCreate = userRepo.findByEmail(principal.getName());
+		itineraire.setUserCreate(userCreate);
+		itineraire.setDateCreate(new Date());
 		itineraireRepo.save(itineraire);
 		return "redirect:/itineraires/"; 
 	}
@@ -87,12 +96,15 @@ public class ItineraireController {
     }
     
     @PostMapping("/updateItineraire/{id}")
-	public String updateItineraire(@PathVariable("id") long id, @Valid Itineraire itineraire, BindingResult result)
+	public String updateItineraire(@PathVariable("id") long id, @Valid Itineraire itineraire, BindingResult result, Principal principal)
 	{
     	if (result.hasErrors()) {
     		itineraire.setId(id);
             return "itineraire/edit-itineraire";
         }
+    	User userUpdate = userRepo.findByEmail(principal.getName());
+    	itineraire.setUserUpdate(userUpdate);
+    	itineraire.setDateUpdate(new Date());
     	itineraireRepo.save(itineraire);
 		return "redirect:/itineraires/"; 
 	}
