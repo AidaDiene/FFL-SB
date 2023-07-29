@@ -26,50 +26,62 @@
 					<!-- Outer Row -->
 					<div class="row justify-content-center">
 
-						<div class="col-xl-12 col-lg-10 col-md-10">
+						<div class="col-xl-8 col-lg-6 col-md-4">
 
 							<div class="card o-hidden border-0 shadow-lg my-5">
+								<div class="card-header  bg-primary">
+									<div class="text-center">
+										<h1 class="h4 text-white">Nouveau geographique</h1>
+									</div>
+								</div>
 								<div class="card-body p-0">
 									<!-- Nested Row within Card Body -->
 									<div class="row justify-content-center">
 										<div class="col-lg-12">
 											<div class="p-5">
-												<div class="text-center">
-													<h1 class="h4 text-gray-900 mb-4">Nouveau point geographique</h1>
-												</div>
 												<form th:action="@{/pointGeographique/savePointGeographique}"
 													th:object="${pg}" method="post" class="user">
 
-													<div class="form-group">
-														<input type="text" id="nom" name="nom" placeholder="Nom" class="form-control form-control-user">
-													</div>
+													<div class="form-group row">
 
-													<div class="form-group">
-														<input type="number" id="latitude" name="latitude"
-															step="0.0000001" placeholder="Latitude" class="form-control form-control-user">
+														<div class="col-sm-6 mb-3 mb-sm-0">
+															<input type="text" id="nom" name="nom"
+																placeholder="Nom &#x2a"
+																class="form-control form-control-user">
+														</div>
+														<div class="col-sm-6 mb-3 mb-sm-0">
+															<select id="typePointGeographique"
+																name="typePointGeographique"
+																class="form-select form-control-user">
+																<option disabled selected>Choisir un type de point
+																	geographique *</option>
+																<option th:each="typePointGeographique : ${tpgList}"
+																	th:value="${typePointGeographique.id}"
+																	th:text="${typePointGeographique.nom}"></option>
+															</select>
+														</div>
 													</div>
+													<br>
+													<div class="form-group row">
 
-													<div class="form-group">
-														<input type="number" id="longitude" name="longitude"
-															step="0.0000001" placeholder="Longitude" class="form-control form-control-user">
+														<div class="col-sm-6 mb-3 mb-sm-0">
+															<input type="number" id="latitude" name="latitude"
+																step="0.0000001" placeholder="Latitude &#x2a"
+																class="form-control form-control-user">
+														</div>
+
+														<div class="col-sm-6 mb-3 mb-sm-0">
+															<input type="number" id="longitude" name="longitude"
+																step="0.0000001" placeholder="Longitude &#x2a"
+																class="form-control form-control-user">
+														</div>
 													</div>
-
-													<div class="form-group">
-														<label for="typePointGeographique">Type point geographique
-															:</label>
-														<select id="typePointGeographique" name="typePointGeographique"
-															class="form-control form-control-user">
-															<!-- Remplacer "typesList" par le nom de votre liste de types de points géographiques disponibles -->
-															<option disabled selected>Choisir un type de point geographique</option>
-															<option th:each="typePointGeographique : ${tpgList}"
-																th:value="${typePointGeographique.id}"
-																th:text="${typePointGeographique.nom}"></option>
-														</select>
-													</div>
-
-													<div class="row justify-content-center">
+													<br>
+													<div class="row d-flex justify-content-between pt-2">
+														<a class="btn btn-warning btn-user col-sm-2"
+															th:href="@{/pointGeographique/}" role="button">Annuler</a>
 														<input type="submit" value="Créer"
-															class="btn btn-primary btn-user btn-block col-sm-3">
+															class="btn btn-primary btn-user col-sm-2">
 													</div>
 												</form>
 
