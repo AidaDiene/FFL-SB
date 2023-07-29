@@ -29,15 +29,16 @@
 						<div class="col-xl-12 col-lg-10 col-md-10">
 
 							<div class="card o-hidden border-0 shadow-lg my-5">
+								<div class="card-header  bg-primary">
+									<div class="text-center">
+										<h1 class="h4 text-white">Modification d'un utilisateur</h1>
+									</div>
+								</div>
 								<div class="card-body p-0">
 									<!-- Nested Row within Card Body -->
 									<div class="row justify-content-center">
 										<div class="col-lg-12">
 											<div class="p-5">
-												<div class="text-center">
-													<h1 class="h4 text-gray-900 mb-4">Modification d'un utilisateur</h1>
-												</div>
-
 												<form action="#"
 													th:action="@{/utilisateurs/updateUser/{id}(id=${user.id})}"
 													th:object="${user}" method="post" class="user">
@@ -58,15 +59,10 @@
 													</div>
 													<br>
 
-													<div class="form-group">
-														<input type="email" name="email" th:value="${user.email}"
-															placeholder="Email" class="form-control form-control-user">
-													</div>
-													<br>
 													<div class="form-group row">
 														<div class="col-sm-6 mb-3 mb-sm-0">
 															<input type="text" name="matricule"
-																th:value="${user.matricule}" placeholder="Email"
+																th:value="${user.matricule}" placeholder="matricule"
 																class="form-control form-control-user">
 														</div>
 														<div class="col-sm-6">
@@ -75,18 +71,36 @@
 																class="form-control form-control-user">
 														</div>
 													</div>
-
 													<br>
-													<label for="isAdmin">Administrateur:</label>
-													<input type="checkbox" name="isAdmin" th:value="${user.isAdmin}"
-														th:checked="${user.isAdmin}">
+													<div class="form-group">
+														<input type="email" name="email" th:value="${user.email}"
+															placeholder="Email" class="form-control form-control-user">
+													</div>
+													<br>
+													<div class="form-check form-switch">
+														<input class="form-check-input" type="checkbox" id="isAdmin"
+															name="isAdmin" th:value="${user.isAdmin}"
+															th:checked="${user.isAdmin}">
+														<label class="form-check-label"
+															for="isAdmin">Administrateur</label>
+													</div>
+													<div class="form-check form-switch">
+														<input class="form-check-input" type="checkbox" id="enabled"
+															name="enabled" th:value="${user.enabled}"
+															th:checked="${user.enabled}">
+														<label class="form-check-label"
+															for="enabled">enabled</label>
+													</div>
 													<br>
 													<input type="hidden" name="password" th:value="${user.password}">
 
-													<div class="row justify-content-center">
-														<button class="btn btn-primary btn-user btn-block col-sm-3"
+													<div class="row d-flex justify-content-between pt-2">
+														<a class="btn btn-warning btn-user col-sm-2"
+															th:href="@{/utilisateurs/}" role="button">Annuler</a>
+														<button class="btn btn-primary btn-user col-sm-2"
 															type="submit">Modifier</button>
 													</div>
+
 												</form>
 
 											</div>

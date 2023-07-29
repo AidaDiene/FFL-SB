@@ -20,19 +20,18 @@
 				<div th:replace="layout::Topbar"></div>
 
 				<!-- Begin Page Content -->
-				<div class="container-fluid">
+				<div class="container-fluid ">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-					<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-						For more information about DataTables, please visit the <a target="_blank"
-							href="https://datatables.net">official DataTables documentation</a>.</p>
-
+					<h1 class="mb-2">Utilisateurs</h1>
+					<p class="mb-4">Bienvenue sur la page de gestion des utilisateurs. Voici une liste de tous les utilisateurs.
+						 Vous pouvez ajouter, modifier, supprimer et afficher les détails de l'utilisateur.</p>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h4 class="m-0 font-weight-bold text-primary">Liste des Utilisateurs</h4>
-							<h6><a th:href="@{/utilisateurs/showNewUserForm}"> Nouveau utilisateur </a></h6>
+							<br>
+							<a th:href="@{/utilisateurs/showNewUserForm}"><button class="btn btn-primary">Nouveau utilisateur</button></a>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -45,22 +44,11 @@
 											<th>Matricule</th>
 											<th>Email</th>
 											<th>Telephone</th>
-											<th>Admin</th>
+											<th>Role</th>
+											<th>Etat</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
-									<tfoot>
-										<tr>
-											<th>ID</th>
-											<th>Prenom</th>
-											<th>Nom</th>
-											<th>Matricule</th>
-											<th>Email</th>
-											<th>Telephone</th>
-											<th>Admin</th>
-											<th>Actions</th>
-										</tr>
-									</tfoot>
 									<tbody>
 										<tr th:each="u:${users}">
 											<td th:text="${u.id}"></td>
@@ -69,12 +57,14 @@
 											<td th:text="${u.matricule}"></td>
 											<td th:text="${u.email}"></td>
 											<td th:text="${u.telephone}"></td>
-											<td th:text="${u.admin}"></td>
+											<td th:text="${u.admin} ? 'Admin' : 'Agent'"></td>
+											<td th:if="${u.enabled}" ><span style="font-size: 15px;" class="badge bg-success text-white">Active</span></td>
+											<td  th:unless="${u.enabled} "><span style="font-size: 15px;" class="badge bg-danger">Désactive</span></td>
 											<td>
-												<a th:href="@{/utilisateurs/showUser/{id}(id=${u.id})}">Voir</a>
+												<a th:href="@{/utilisateurs/showUser/{id}(id=${u.id})}" class="btn btn-sm btn-primary mx-1"><i class="fas fa-eye fa-sm fa-fw"></i></a>
 												<a
-													th:href="@{/utilisateurs/showUserEditFrom/{id}(id=${u.id})}">Modifier</a>
-												<a th:href="@{/utilisateurs/deleteUser/{id}(id=${u.id})}">Supprimer</a>
+													th:href="@{/utilisateurs/showUserEditFrom/{id}(id=${u.id})}" class="btn btn-warning btn-sm mx-1"><i class="fas fa-edit fa-sm fa-fw"></i></a>
+												<a th:href="@{/utilisateurs/deleteUser/{id}(id=${u.id})}" class="btn btn-danger btn-sm mx-1"><i class="fas fa-trash fa-sm fa-fw"></i></a>
 											</td>
 										</tr>
 									</tbody>

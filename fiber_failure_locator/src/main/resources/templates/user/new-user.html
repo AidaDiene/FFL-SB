@@ -29,41 +29,39 @@
 						<div class="col-xl-12 col-lg-10 col-md-10">
 
 							<div class="card o-hidden border-0 shadow-lg my-5">
+								<div class="card-header  bg-primary">
+									<div class="text-center">
+										<h1 class="h4 text-white">Nouveau utilisateur</h1>
+									</div>
+								</div>
 								<div class="card-body p-0">
 									<!-- Nested Row within Card Body -->
 									<div class="row justify-content-center">
 										<div class="col-lg-12">
 											<div class="p-5">
-												<div class="text-center">
-													<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-												</div>
 												<form action="#" th:action="@{/utilisateurs/saveUser}"
 													th:object="${user}" method="post" class="user">
 
 													<div class="form-group row">
 														<div class="col-sm-6 mb-3 mb-sm-0">
 															<input type="text" id="prenom" name="prenom"
-																placeholder="Prenom"
+																placeholder="Prenom &#x2a"
 																class="form-control form-control-user">
 														</div>
 
 														<div class="col-sm-6">
-															<input type="text" id="nom" name="nom" placeholder="Nom"
+															<input type="text" id="nom" name="nom"
+																placeholder="Nom &#x2a "
 																class="form-control form-control-user">
 														</div>
 													</div>
 													<br>
 
-													<div class="form-group">
-														<input type="email" id="email" name="email" placeholder="Email"
-															class="form-control form-control-user">
-													</div>
-													<br>
 													<div class="form-group row">
 														<div class="col-sm-6 mb-3 mb-sm-0">
 
 															<input type="text" id="matricule" name="matricule"
-																placeholder="Matricule"
+																placeholder="Matricule  &#x2a"
 																class="form-control form-control-user">
 														</div>
 														<div class="col-sm-6">
@@ -72,15 +70,27 @@
 																class="form-control form-control-user">
 														</div>
 													</div>
-
 													<br>
-
-													<label for="isAdmin">Administrateur:</label>
-													<input type="checkbox" id="isAdmin" name="isAdmin"><br>
-													<div class="row justify-content-center">
-														<input type="submit" value="Créer"
-															class="btn btn-primary btn-user btn-block col-sm-3">
+													<div class="form-group">
+														<input type="email" id="email" name="email"
+															placeholder="Email &#x2a"
+															class="form-control form-control-user">
 													</div>
+													<br>
+													<div class="form-check form-switch">
+														<input class="form-check-input" type="checkbox" id="isAdmin"
+															name="isAdmin">
+														<label class="form-check-label"
+															for="isAdmin">Administrateur</label>
+													</div>
+													<br>
+													<div class="row d-flex justify-content-between pt-2">
+														<a class="btn btn-warning btn-user col-sm-2" th:href="@{/utilisateurs/}"
+															role="button">Annuler</a>
+														<input type="submit" value="Créer"
+															class="btn btn-primary btn-user col-sm-2">
+													</div>
+
 												</form>
 											</div>
 										</div>

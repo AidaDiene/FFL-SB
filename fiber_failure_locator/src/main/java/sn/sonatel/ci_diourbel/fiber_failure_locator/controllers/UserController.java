@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
@@ -45,7 +48,7 @@ public class UserController implements WebMvcConfigurer {
 	}
 	
 	@PostMapping("/saveUser")
-	public String saveUser( User user, BindingResult result)
+	public String saveUser( User user, BindingResult result, HttpServletRequest request)
 	{
 		if (result.hasErrors()) {
             return "user/new-user";
@@ -55,6 +58,12 @@ public class UserController implements WebMvcConfigurer {
 	    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	    String hashedPassword = passwordEncoder.encode(password);
 	    user.setPassword(hashedPassword);
+	    user.setEnabled(true);
+	    if(request.getParameter("isAdmin") == null) {
+    		user.setAdmin(false);
+	    }else {
+		    	user.setAdmin(true);
+	    }
 		userRepo.save(user);
 		return "redirect:/utilisateurs/"; 
 	}
@@ -75,12 +84,22 @@ public class UserController implements WebMvcConfigurer {
     }
     
     @PostMapping("/updateUser/{id}")
-	public String updateUser(@PathVariable("id") long id, User user, BindingResult result)
+	public String updateUser(@PathVariable("id") long id, User user, BindingResult result, HttpServletRequest request)
 	{
     	if (result.hasErrors()) {
             user.setId(id);
             return "user/edit-user";
         }
+    	 if(request.getParameter("isAdmin") == null) {
+     		user.setAdmin(false);
+ 	    }else {
+ 		    	user.setAdmin(true);
+ 	    }
+    	 if(request.getParameter("enabled") == null) {
+      		user.setEnabled(false);
+  	    }else {
+  		    	user.setEnabled(true);
+  	    }
         userRepo.save(user);
         return "redirect:/utilisateurs/";
 	}

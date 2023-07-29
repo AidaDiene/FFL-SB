@@ -20,18 +20,26 @@
 				<div th:replace="layout::Topbar"></div>
 
 				<!-- Begin Page Content -->
-				<div class="container-fluid">
+				<div class="container-fluid d-flex justify-content-center pt-5">
 					<!-- DataTales Example -->
-					<div class="card shadow mb-4">
+					<div class="card shadow mb-4" style="width: 50%;">
+						<div class="card-header bg-primary text-white">
+							<h2 class="card-title">Détails de l'utilisateur ~ <span
+									th:text="${user.prenom + ' ' + user.nom}"></span></h2>
+							<div class="mt-4">
+								<a class="btn btn-secondary" th:href="@{/utilisateurs/}" role="button">Afficher la liste
+									<i class="fas fa-list-alt fa-sm fa-fw"></i></a>
+								<a th:href="@{/utilisateurs/showUserEditFrom/{id}(id=${user.id})}" role="button"
+									class="btn btn-warning ms-1">Modifier <i class="fas fa-edit fa-sm fa-fw"></i></a>
+								<a th:href="@{/utilisateurs/deleteUser/{id}(id=${user.id})}" role="button"
+									class="btn btn-danger ms-1">Supprimer <i class="fas fa-trash fa-sm fa-fw"></i></a>
+							</div>
+						</div>
 						<div class="card-body">
 							<div class="table-responsive">
 
-								<h2>Détails de l'utilisateur</h2>
-								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-									<tr>
-										<th>Attribut</th>
-										<th>Valeur</th>
-									</tr>
+								<table class="table table-bordered" id="dataTable">
+
 									<tr>
 										<td>Prénom</td>
 										<td th:text="${user.prenom}"></td>
@@ -45,20 +53,23 @@
 										<td th:text="${user.matricule}"></td>
 									</tr>
 									<tr>
-										<td>Téléphone</td>
-										<td th:text="${user.telephone}"></td>
-									</tr>
-									<tr>
 										<td>Email</td>
 										<td th:text="${user.email}"></td>
 									</tr>
 									<tr>
-										<td>Mot de passe</td>
-										<td th:text="${user.password}"></td>
+										<td>Téléphone</td>
+										<td th:text="${user.telephone}"></td>
 									</tr>
 									<tr>
-										<td>Est administrateur</td>
-										<td th:text="${user.isAdmin}"></td>
+										<td>Role</td>
+										<td th:text="${user.admin} ? 'Admin' : 'Agent'"></td>
+									</tr>
+									<tr>
+										<td>Etat</td>
+										<td th:if="${user.enabled}"><span style="font-size: 15px;"
+												class="badge bg-success text-white">Active</span></td>
+										<td th:unless="${user.enabled} "><span style="font-size: 15px;"
+												class="badge bg-danger">Désactive</span></td>
 									</tr>
 								</table>
 							</div>
