@@ -23,17 +23,21 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-					<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-						For more information about DataTables, please visit the <a target="_blank"
-							href="https://datatables.net">official DataTables documentation</a>.</p>
+					<h1 class="h3 mb-2">Type point geographique</h1>
+					<p class="mb-4">Bienvenue sur la page de gestion des types de point geographique.
+						le Type Point Geographique est un élément clé qui permet de structurer et de différencier les
+						points géographiques au sein de notre système, améliorant ainsi la précision et la facilité de
+						gestion de l'information géographique.
+						Voici une liste de tous les types de point geographique .
+						Vous pouvez ajouter, modifier, supprimer et afficher les détails d'un type point geographique.
+					</p>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<h4 class="m-0 font-weight-bold text-primary">Liste des types de point geographique</h4>
-							<h6><a th:href="@{/typePointGeographique/showNewTypePointGeographiqueForm}"> Nouveau type de
-									point geographique </a></h6>
+							<h6><a th:href="@{/typePointGeographique/showNewTypePointGeographiqueForm}"
+									class="btn btn-primary mt-3"> Nouveau type</a></h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -46,26 +50,21 @@
 											<th>Actions</th>
 										</tr>
 									</thead>
-									<tfoot>
-										<tr>
-											<th>ID</th>
-											<th>Nom</th>
-											<th>Code</th>
-											<th>Actions</th>
-										</tr>
-									</tfoot>
 									<tbody>
 										<tr th:each="tpg:${tpgs}">
 											<td th:text="${tpg.id}"></td>
 											<td th:text="${tpg.nom}"></td>
 											<td th:text="${tpg.code}"></td>
 											<td>
-												<a
-													th:href="@{/typePointGeographique/showTypePointGeographique/{id}(id=${tpg.id})}">Voir</a>
-												<a
-													th:href="@{/typePointGeographique/showTypePointGeographiqueEditFrom/{id}(id=${tpg.id})}">Modifier</a>
-												<a
-													th:href="@{/typePointGeographique/deleteTypePointGeographique/{id}(id=${tpg.id})}">Supprimer</a>
+												<a th:href="@{/typePointGeographique/showTypePointGeographique/{id}(id=${tpg.id})}"
+													class="btn btn-sm btn-primary mx-1"><i
+														class="fas fa-eye fa-sm fa-fw"></i></a>
+												<a th:href="@{/typePointGeographique/showTypePointGeographiqueEditFrom/{id}(id=${tpg.id})}"
+													class="btn btn-warning btn-sm mx-1"><i
+														class="fas fa-edit fa-sm fa-fw"></i></a>
+												<a th:href="@{/typePointGeographique/deleteTypePointGeographique/{id}(id=${tpg.id})}"
+													class="btn btn-danger btn-sm mx-1"><i
+														class="fas fa-trash fa-sm fa-fw"></i></a>
 											</td>
 										</tr>
 									</tbody>
@@ -75,7 +74,7 @@
 					</div>
 
 				</div>
-				
+
 				<!-- /.container-fluid -->
 
 			</div>
@@ -90,12 +89,6 @@
 
 	<div th:replace="layout::ScrollButtonAndLogoutModal"></div>
 
-	<!-- Page level plugins -->
-	<script th:src="@{/vendor/datatables/jquery.dataTables.min.js}"></script>
-	<script th:src="@{/vendor/datatables/dataTables.bootstrap4.min.js}"></script>
-
-	<!-- Page level custom scripts -->
-	<script th:src="@{/js/demo/datatables-demo.js}"></script>
 
 </body>
 

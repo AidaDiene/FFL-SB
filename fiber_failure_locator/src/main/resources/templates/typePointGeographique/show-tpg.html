@@ -20,18 +20,24 @@
 				<div th:replace="layout::Topbar"></div>
 
 				<!-- Begin Page Content -->
-				<div class="container-fluid">
+				<div class="container-fluid d-flex justify-content-center pt-5">
 					<!-- DataTales Example -->
-					<div class="card shadow mb-4">
+					<div class="card shadow mb-4" style="width: 50%;">
+						<div class="card-header bg-primary text-white">
+							<h2 class="card-title">Détails du type ~ <span
+									th:text="${tpg.nom}"></span></h2>
+							<div class="mt-4">
+								<a class="btn btn-secondary" th:href="@{/typePointGeographique/}" role="button">Afficher la liste
+									<i class="fas fa-list-alt fa-sm fa-fw"></i></a>
+								<a th:href="@{/typePointGeographique/showTypePointGeographiqueEditFrom/{id}(id=${tpg.id})}" role="button"
+									class="btn btn-warning ms-1">Modifier <i class="fas fa-edit fa-sm fa-fw"></i></a>
+								<a th:href="@{/typePointGeographique/deleteTypePointGeographique/{id}(id=${tpg.id})}" role="button"
+									class="btn btn-danger ms-1">Supprimer <i class="fas fa-trash fa-sm fa-fw"></i></a>
+							</div>
+						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-
-								<h2>Détails d'un type point geographique </h2>
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-									<tr>
-										<th>Attribut</th>
-										<th>Valeur</th>
-									</tr>
 									<tr>
 										<td>Nom</td>
 										<td th:text="${tpg.nom}"></td>
@@ -39,14 +45,6 @@
 									<tr>
 										<td>Code</td>
 										<td th:text="${tpg.code}"></td>
-									</tr>
-									<!-- <tr>
-      <td>User create</td>
-      <td th:text="${drone.userCreate}"></td>
-    </tr> -->
-									<tr>
-										<td>Date create</td>
-										<td th:text="${tpg.dateCreate}"></td>
 									</tr>
 								</table>
 							</div>

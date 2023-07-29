@@ -26,37 +26,41 @@
 					<!-- Outer Row -->
 					<div class="row justify-content-center">
 
-						<div class="col-xl-12 col-lg-10 col-md-8">
+						<div class="col-xl-8 col-lg-6 col-md-"4>
 
 							<div class="card o-hidden border-0 shadow-lg my-5">
+								<div class="card-header  bg-primary">
+									<div class="text-center">
+										<h1 class="h4 text-white">Nouveau type point geographique</h1>
+									</div>
+								</div>
 								<div class="card-body p-0">
 									<!-- Nested Row within Card Body -->
 									<div class="row justify-content-center">
 										<div class="col-lg-9">
 											<div class="p-5">
-												<div class="text-center">
-													<h1 class="h4 text-gray-900 mb-4">Nouveau type point geographique</h1>
-												</div>
-
 												<form th:action="@{/typePointGeographique/saveTypePointGeographique}"
 													th:object="${tpg}" method="post" class="user">
 
 													<div class="form-group">
-														<input type="text" id="nom" name="nom" placeholder="Nom" class="form-control form-control-user">
+														<input type="text" id="nom" name="nom" placeholder="Nom"
+															class="form-control form-control-user">
 													</div>
 													<br>
 
 													<div class="form-group">
-														<input type="text" id="code" name="code" placeholder="Code" class="form-control form-control-user">
+														<input type="text" id="code" name="code" placeholder="Code"
+															class="form-control form-control-user">
 													</div>
 													<br>
-
-													<div class="row justify-content-center">
+													<div class="row d-flex justify-content-between pt-2">
+														<a class="btn btn-warning btn-user col-sm-2"
+															th:href="@{/typePointGeographique/}"
+															role="button">Annuler</a>
 														<input type="submit" value="Créer"
-															class="btn btn-primary btn-user btn-block col-sm-3">
+															class="btn btn-primary btn-user col-sm-2">
 													</div>
 												</form>
-
 											</div>
 										</div>
 									</div>
