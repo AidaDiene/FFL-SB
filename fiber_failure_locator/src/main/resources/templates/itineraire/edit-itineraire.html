@@ -26,18 +26,19 @@
 					<!-- Outer Row -->
 					<div class="row justify-content-center">
 
-						<div class="col-xl-12 col-lg-10 col-md-9">
+						<div class="col-xl-8 col-lg-6 col-md-4">
 
 							<div class="card o-hidden border-0 shadow-lg my-5">
+								<div class="card-header  bg-primary">
+									<div class="text-center">
+										<h1 class="h4 text-white">Modification d'une itineraire</h1>
+									</div>
+								</div>
 								<div class="card-body p-0">
 									<!-- Nested Row within Card Body -->
 									<div class="row justify-content-center">
 										<div class="col-lg-9">
 											<div class="p-5">
-												<div class="text-center">
-													<h1 class="h4 text-gray-900 mb-4">Modification d'une itineraire</h1>
-												</div>
-
 												<form action="#"
 													th:action="@{/itineraires/updateItineraire/{id}(id=${itineraire.id})}"
 													th:object="${itineraire}" method="post" class="user">
@@ -48,8 +49,7 @@
 													</div>
 													<br>
 													<div>
-														<label for="depart">Depart :</label>
-														<select id="depart" name="depart">
+														<select id="depart" name="depart" class="form-select form-control-user"> 
 															<option th:each="depart : ${centralList}"
 																th:value="${depart.id}" th:text="${depart.nom}"
 																th:selected="${depart.id == itineraire.depart.id}">
@@ -58,8 +58,7 @@
 													</div>
 													<br>
 													<div>
-														<label for="arrivee">Arrivee :</label>
-														<select id="arrivee" name="arrivee">
+														<select id="arrivee" name="arrivee" class="form-select form-control-user">
 															<option th:each="arrivee : ${siteList}"
 																th:value="${arrivee.id}" th:text="${arrivee.nom}"
 																th:selected="${arrivee.id == itineraire.arrivee.id}">
@@ -68,8 +67,7 @@
 													</div>
 													<br>
 													<div>
-														<label for="pointGeographiques">Points géographiques :</label>
-														<select id="pointGeographiques" name="pointGeographiques"
+														<select id="pointGeographiques" name="pointGeographiques" class="form-select"
 															multiple>
 															<option th:each="point : ${chambreList}"
 																th:value="${point.id}" th:text="${point.nom}"
@@ -78,8 +76,10 @@
 														</select>
 													</div>
 													<br>
-													<div class="row justify-content-center">
-														<button class="btn btn-primary btn-user btn-block col-sm-3"
+													<div class="row d-flex justify-content-between pt-2">
+														<a class="btn btn-warning btn-user col-sm-2"
+															th:href="@{/itineraires/}" role="button">Annuler</a>
+														<button class="btn btn-primary btn-user col-sm-2"
 															type="submit">Modifier</button>
 													</div>
 												</form>
