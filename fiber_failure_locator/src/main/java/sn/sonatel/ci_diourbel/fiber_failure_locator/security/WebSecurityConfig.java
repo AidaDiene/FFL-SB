@@ -19,16 +19,18 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(
-				(requests) -> requests
-				.requestMatchers("/css/**").permitAll()
-				.requestMatchers("/img/**").permitAll()
-				.requestMatchers("/js/**").permitAll()
-				.requestMatchers("/scss/**").permitAll()
-				.requestMatchers("/vendor/**").permitAll()
-				.anyRequest().authenticated())
-				.formLogin((form) -> form.loginPage("/login").permitAll())
-				.logout((logout) -> logout.permitAll());
+        http.authorizeHttpRequests(
+                (requests) -> requests
+                        .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/img/**").permitAll()
+                        .requestMatchers("/js/**").permitAll()
+                        .requestMatchers("/scss/**").permitAll()
+                        .requestMatchers("/vendor/**").permitAll()
+                        .anyRequest().authenticated())
+                .formLogin((form) -> form.loginPage("/login").permitAll())
+                .logout((logout) -> logout.permitAll())
+                .rememberMe(me -> me
+                        .key("rememberMe"));
 
 		return http.build();
 	}
