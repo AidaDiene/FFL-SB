@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import jakarta.servlet.http.HttpServletRequest;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -55,9 +52,7 @@ public class UserController implements WebMvcConfigurer {
         }
         
 	    String password = "passer123";
-	    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	    String hashedPassword = passwordEncoder.encode(password);
-	    user.setPassword(hashedPassword);
+	    user.setPassword(User.encodePassword(password));
 	    user.setEnabled(true);
 	    if(request.getParameter("isAdmin") == null) {
     		user.setAdmin(false);

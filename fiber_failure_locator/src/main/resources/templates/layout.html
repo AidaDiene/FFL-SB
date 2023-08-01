@@ -96,17 +96,17 @@
 			</div>
 
 			<li class="nav-item">
-				<a class="nav-link collapsed" href="#" th:href="@{/}" data-toggle="collapse"
+				<a class="nav-link collapsed" href="#" th:href="@{/monProfil}" data-toggle="collapse"
 					data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
 					<i class="fa fa-user-circle"></i>
 					<span>Mon profil</span>
 				</a>
 				<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="login.html">Mon profil</a>
-						<a class="collapse-item" href="register.html">Changer mot de passe</a>
-						<a class="collapse-item" href="forgot-password.html">Mot de passe oublié</a>
-						<a class="collapse-item" href="404.html">Deconnexion</a>
+						<a class="collapse-item" href="#" th:href="@{/monProfil}">Mon profil</a>
+						<a class="collapse-item" href="#" th:href="@{/updatePassword}">Changer mot de passe</a>
+						<a class="collapse-item" href="#">Mot de passe oublié</a>
+						<a class="collapse-item" href="#">Deconnexion</a>
 					</div>
 				</div>
 			</li>
@@ -245,7 +245,7 @@
 								</h6>
 								<a class="dropdown-item d-flex align-items-center" href="#">
 									<div class="dropdown-list-image mr-3">
-										<img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
+										<img class="rounded-circle" th:src="@{/img/undraw_profile_1.svg}" alt="...">
 										<div class="status-indicator bg-success"></div>
 									</div>
 									<div class="font-weight-bold">
@@ -308,7 +308,7 @@
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 								aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#">
+								<a class="dropdown-item" href="#" th:href="@{/monProfil}">
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 									Profile
 								</a>

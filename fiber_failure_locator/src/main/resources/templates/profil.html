@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout::header">
+	<title>Mon profil</title>
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<div th:replace="layout::Sidebar"></div>
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<div th:replace="layout::Topbar"></div>
+
+				<!-- Begin Page Content -->
+
+				<section class="section profile  pt-5">
+					<div class="row d-flex justify-content-center">
+
+						<div class="col-xl-9 ">
+
+							<div class="card">
+								<div class="card-header  bg-primary">
+									<div class="text-center">
+										<h1 class="h4 text-white">Informations sur votre profil</h1>
+									</div>
+								</div>
+								<div class="card-body pt-3">
+									<!-- Bordered Tabs -->
+
+									<div class="tab-content pt-2">
+										<div class="tab-pane fade show active profile-overview" id="profile-overview">
+											<div>
+												<h5 class="card-title text-primary pt-3">Les détails de mon profil</h5>
+
+												<div class="row pt-3">
+													<div class="col-lg-3 col-md-4 label text-info pr-5">Nom complet
+													</div>
+													<div class="col-lg-9 col-md-8 pl-5"
+														th:text="${user.prenom + ' ' + user.nom}"></div>
+												</div>
+
+												<div class="row pt-3">
+													<div class="col-lg-3 col-md-4 label text-info pr-5">Matricule</div>
+													<div class="col-lg-9 col-md-8 pl-5" th:text="${user.matricule}">
+													</div>
+												</div>
+
+												<div class="row pt-3">
+													<div class="col-lg-3 col-md-4 label text-info pr-5">Email</div>
+													<div class="col-lg-9 col-md-8 pl-5" th:text="${user.email}"></div>
+												</div>
+
+												<div class="row pt-3">
+													<div class="col-lg-3 col-md-4 label text-info pr-5">Telephone</div>
+													<div class="col-lg-9 col-md-8 pl-5" th:text="${user.telephone}">
+													</div>
+												</div>
+
+												<div class="row pt-3">
+													<div class="col-lg-3 col-md-4 label text-info pr-5">Role</div>
+													<div class="col-lg-9 col-md-8 pl-5">
+														<div class="list-group p-1"
+															th:text="${user.admin ? 'Admin' : 'Agent'}"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div><!-- End Bordered Tabs -->
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</section>
+				<!-- /.container-fluid -->
+
+			</div>
+			<!-- End of Main Content -->
+
+			<div th:replace="layout::Footer"></div>
+
+		</div>
+		<!-- End of Content Wrapper -->
+	</div>
+	<!-- End of Page Wrapper -->
+
+	<div th:replace="layout::ScrollButtonAndLogoutModal"></div>
+
+</body>
+
+</html>

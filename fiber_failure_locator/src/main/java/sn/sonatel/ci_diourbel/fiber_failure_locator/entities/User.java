@@ -8,6 +8,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 @Table(name = "utilisateurs")
 @Entity
@@ -128,5 +131,14 @@ public class User {
 				+ ", email=" + email + ", password=" + password + ", isAdmin=" + isAdmin + ", enabled=" + enabled + "]";
 	}
 
+	 
+    public static String encodePassword(String password) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.encode(password);
+    }
 	
+    public static boolean verifyPassword(String password, String encodedPassword) {
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.matches(password, encodedPassword);
+    }
 }
