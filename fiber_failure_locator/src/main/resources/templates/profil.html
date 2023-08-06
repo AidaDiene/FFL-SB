@@ -21,10 +21,10 @@
 
 				<!-- Begin Page Content -->
 
-				<section class="section profile  pt-5">
+				<section class="section profile">
 					<div class="row d-flex justify-content-center">
 
-						<div class="col-xl-9 ">
+						<div class="col-xl-9">
 
 							<div class="card">
 								<div class="card-header  bg-primary">
@@ -32,48 +32,84 @@
 										<h1 class="h4 text-white">Informations sur votre profil</h1>
 									</div>
 								</div>
-								<div class="card-body pt-3">
+								<div class="card-body pt-3 d-flex justify-content-center">
 									<!-- Bordered Tabs -->
 
-									<div class="tab-content pt-2">
-										<div class="tab-pane fade show active profile-overview" id="profile-overview">
-											<div>
-												<h5 class="card-title text-primary pt-3">Les détails de mon profil</h5>
+									<div class="pt-2">
+										<div>
+											<h5 class="card-title text-primary pt-3">Les détails de mon profil</h5>
 
-												<div class="row pt-3">
-													<div class="col-lg-3 col-md-4 label text-info pr-5">Nom complet
-													</div>
-													<div class="col-lg-9 col-md-8 pl-5"
-														th:text="${user.prenom + ' ' + user.nom}"></div>
+											<div class="row pt-3">
+												<div class="col-lg-6 col-md-6 label text-info pr-5">Nom complet
 												</div>
-
-												<div class="row pt-3">
-													<div class="col-lg-3 col-md-4 label text-info pr-5">Matricule</div>
-													<div class="col-lg-9 col-md-8 pl-5" th:text="${user.matricule}">
-													</div>
+												<div class="col-lg-6 col-md-6">
+													<span th:text="${user.prenom}"></span>
+													<span th:text="${user.nom}"></span>
 												</div>
+											</div>
 
-												<div class="row pt-3">
-													<div class="col-lg-3 col-md-4 label text-info pr-5">Email</div>
-													<div class="col-lg-9 col-md-8 pl-5" th:text="${user.email}"></div>
+											<div class="row pt-3">
+												<div class="col-lg-6 col-md-6 label text-info pr-5">Matricule</div>
+												<div class="col-lg-6 col-md-6" th:text="${user.matricule}">
 												</div>
+											</div>
 
-												<div class="row pt-3">
-													<div class="col-lg-3 col-md-4 label text-info pr-5">Telephone</div>
-													<div class="col-lg-9 col-md-8 pl-5" th:text="${user.telephone}">
-													</div>
+											<div class="row pt-3">
+												<div class="col-lg-6 col-md-6 label text-info pr-5">Email</div>
+												<div class="col-lg-6 col-md-6" th:text="${user.email}"></div>
+											</div>
+
+											<div class="row pt-3">
+												<div class="col-lg-6 col-md-6 label text-info pr-5">Telephone</div>
+												<div class="col-lg-6 col-md-6" th:text="${user.telephone}">
 												</div>
+											</div>
 
-												<div class="row pt-3">
-													<div class="col-lg-3 col-md-4 label text-info pr-5">Role</div>
-													<div class="col-lg-9 col-md-8 pl-5">
-														<div class="list-group p-1"
-															th:text="${user.admin ? 'Admin' : 'Agent'}"></div>
+											<div class="row pt-3">
+												<div class="col-lg-6 col-md-6 label text-info">Role</div>
+												<div class="col-lg-4 col-md-4">
+													<div class="list-group p-1"
+														th:text="${user.admin ? 'Admin' : 'Agent'}">
 													</div>
 												</div>
 											</div>
 										</div>
-									</div><!-- End Bordered Tabs -->
+										<hr class="border-5 bg-primary">
+										<div class="container pt-2" style="max-width: 500px">
+											<h3 class="mb-3 text-primary" th:if="${user.photo}">
+												Changer ma photo de
+												profil</h3>
+											<h3 class="mb-3 text-primary" th:unless="${user.photo}">
+												Ajouter une photo de
+												profil</h3>
+											<div class="d-flex justify-content-center">
+												<img class="img-profile rounded-circle w-50 h-auto"
+													th:if="${user.photo}" th:src="${user.photo}" alt="photoProfil">
+												<img class="img-profile rounded-circle w-50 h-auto"
+													th:unless="${user.photo}" src="img/undraw_profile.svg">
+											</div>
+											<div class="pt-3">
+												<form id="uploadForm" method="post" th:action="@{/files/upload}"
+													enctype="multipart/form-data">
+													<input id="input-file" type="file" name="file" />
+													<button class="btn btn-sm btn-outline-success float-right"
+														type="submit">
+														Upload
+													</button>
+												</form>
+											</div>
+											<div th:if="${message != null}"
+												class="alert alert-secondary alert-dismissible fade show text-center message mt-3"
+												role="alert">
+												[[${message}]]
+												<button type="button" class="close btn-sm" data-dismiss="alert"
+													aria-label="Close">
+													<span aria-hidden="true">×</span>
+												</button>
+											</div>
+										</div>
+									</div>
+									<!-- End Bordered Tabs -->
 
 								</div>
 							</div>

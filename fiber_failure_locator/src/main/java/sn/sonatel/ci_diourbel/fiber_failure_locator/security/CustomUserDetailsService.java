@@ -39,7 +39,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 				user.getEmail(),
 				user.getPassword(),
 				Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")),
-				user.isAdmin());
+				user.isAdmin(),
+				user.getPhoto()
+				);
 	}
 
 }

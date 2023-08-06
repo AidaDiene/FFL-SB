@@ -26,6 +26,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/scss/**").permitAll()
                         .requestMatchers("/vendor/**").permitAll()
+                        .requestMatchers("/uploads/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form.loginPage("/login").permitAll())
                 .logout((logout) -> logout.permitAll())

@@ -15,9 +15,10 @@ public class CustomUserDetails implements UserDetails {
 	private final String password;
 	private final Collection<? extends GrantedAuthority> authorities;
 	private final boolean enabled;
+	private final String photo;
 
 	public CustomUserDetails(String prenom, String nom, String matricule, String telephone, String username, String password,
-			Collection<? extends GrantedAuthority> authorities, boolean enabled) {
+			Collection<? extends GrantedAuthority> authorities, boolean enabled, String photo) {
 		this.prenom = prenom;
 		this.nom = nom;
 		this.matricule = matricule;
@@ -26,6 +27,7 @@ public class CustomUserDetails implements UserDetails {
 		this.password = password;
 		this.authorities = authorities;
 		this.enabled = enabled;
+		this.photo = photo;
 	}
 
 	public String getNom() {
@@ -46,6 +48,10 @@ public class CustomUserDetails implements UserDetails {
 
 	public String getPassword() {
 		return this.password;
+	}
+	
+	public String getPhoto() {
+		return this.photo;
 	}
 
 	@Override

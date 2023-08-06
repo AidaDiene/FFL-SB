@@ -8,15 +8,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import sn.sonatel.ci_diourbel.fiber_failure_locator.entities.User;
 import sn.sonatel.ci_diourbel.fiber_failure_locator.repos.UserRepository;
+import sn.sonatel.ci_diourbel.fiber_failure_locator.services.UserService;
 
 @Controller
 public class HomeController {
 
 	@Autowired
 	UserRepository userRepo;
+	@Autowired
+	UserService userServ;
 
 	@GetMapping("/")
 	public String index() {
@@ -59,4 +63,21 @@ public class HomeController {
 		return "change-password";
 	}
 
+	  @PostMapping("/files/upload")
+	  public String uploadFile(Model model, @RequestParam("file") MultipartFile file, Principal principal) {
+	    String message = "";
+
+	    try {
+	       userServ.saveFile(file);
+
+	      message = "Uploaded the file successfully: " + file.getOriginalFilename();
+	      model.addAttribute("message", message);
+	    } catch (Exception e) {
+	      message = "Could not upload the file: " + file.getOriginalFilename() + ". Error: " + e.getMessage();
+	      model.addAttribute("message", message);
+	    }
+	    User user =  userRepo.findByEmail(principal.getName());
+	    model.addAttribute("user", user);
+	    return "profil";
+	  }
 }
