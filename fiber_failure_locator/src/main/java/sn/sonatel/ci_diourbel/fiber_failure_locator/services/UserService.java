@@ -20,8 +20,8 @@ public interface UserService {
 
 	List<User> getAllUsers();
 
-	public void init();
+	void init();
 
-	public void saveFile(MultipartFile file);
+	void saveFile(MultipartFile file);
 
 }

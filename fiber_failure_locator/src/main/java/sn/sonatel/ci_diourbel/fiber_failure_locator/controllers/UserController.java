@@ -24,11 +24,6 @@ public class UserController implements WebMvcConfigurer {
 	
 	@Autowired
 	UserRepository userRepo;
-	
-	/* @Override
-	    public void addViewControllers(ViewControllerRegistry registry) {
-	        registry.addViewController("/results").setViewName("results");
-	    }*/
 
 	@GetMapping("/")
 	public String getAllUsers(Model model)
@@ -54,11 +49,7 @@ public class UserController implements WebMvcConfigurer {
 	    String password = "passer123";
 	    user.setPassword(User.encodePassword(password));
 	    user.setEnabled(true);
-	    if(request.getParameter("isAdmin") == null) {
-    		user.setAdmin(false);
-	    }else {
-		    	user.setAdmin(true);
-	    }
+        user.setAdmin(request.getParameter("isAdmin") != null);
 		userRepo.save(user);
 		return "redirect:/utilisateurs/"; 
 	}
@@ -85,16 +76,8 @@ public class UserController implements WebMvcConfigurer {
             user.setId(id);
             return "user/edit-user";
         }
-    	 if(request.getParameter("isAdmin") == null) {
-     		user.setAdmin(false);
- 	    }else {
- 		    	user.setAdmin(true);
- 	    }
-    	 if(request.getParameter("enabled") == null) {
-      		user.setEnabled(false);
-  	    }else {
-  		    	user.setEnabled(true);
-  	    }
+        user.setAdmin(request.getParameter("isAdmin") != null);
+        user.setEnabled(request.getParameter("enabled") != null);
         userRepo.save(user);
         return "redirect:/utilisateurs/";
 	}
