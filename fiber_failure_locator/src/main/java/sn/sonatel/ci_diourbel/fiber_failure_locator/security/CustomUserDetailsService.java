@@ -1,6 +1,8 @@
 package sn.sonatel.ci_diourbel.fiber_failure_locator.security;
 
 import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,10 +26,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("Utilisateur non trouvé !");
 		}
-		if (user.isAdmin() == false) {
+		if (!user.isAdmin()) {
 			throw new UsernameNotFoundException("Cet utilisateur n'a pas l'acces admin !");
 		}
-		if (user.isEnabled() == false) {
+		if (!user.isEnabled()) {
 			throw new UsernameNotFoundException("Ce compte est desactivé !");
 		}
 
@@ -38,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 				user.getTelephone(),
 				user.getEmail(),
 				user.getPassword(),
-				Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")),
+                List.of(new SimpleGrantedAuthority("ROLE_ADMIN")),
 				user.isAdmin(),
 				user.getPhoto()
 				);

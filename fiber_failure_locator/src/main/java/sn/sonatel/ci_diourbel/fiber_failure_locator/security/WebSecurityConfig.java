@@ -29,7 +29,13 @@ public class WebSecurityConfig {
                         .requestMatchers("/uploads/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form.loginPage("/login").permitAll())
-                .logout((logout) -> logout.permitAll())
+				.logout((logout) -> {
+					logout.logoutUrl("/logout")
+							.permitAll()
+							.logoutSuccessUrl("/login")
+							.deleteCookies("JSESSIONID")
+							.invalidateHttpSession(true);
+				})
                 .rememberMe(me -> me
                         .key("rememberMe"));
 
@@ -40,5 +46,4 @@ public class WebSecurityConfig {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
-
 }
