@@ -5,14 +5,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 @Entity
 public class PointGeographique {
@@ -29,17 +23,21 @@ public class PointGeographique {
 	@Column(nullable = false)
 	@NotNull
 	private Double longitude;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	@NotNull
+	@JsonIgnore
 	private TypePointGeographique typePointGeographique;
 	@ManyToMany(mappedBy = "pointGeographiques")
+	@JsonIgnore
     private List<Itineraire> itineraires;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false, updatable = false)
 	@NotNull
+	@JsonIgnore
 	private User userCreate;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonIgnore
 	private User userUpdate;
 	@Column(nullable = false, updatable = false)
 	private Date dateCreate; 
@@ -57,7 +55,11 @@ public class PointGeographique {
 		this.longitude = longitude;
 		this.typePointGeographique = typePointGeographique;
 	}
-	
+	public PointGeographique(Double latitude, Double longitude) {
+		super();
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 	public Long getId() {
 		return id;
 	}

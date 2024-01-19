@@ -3,6 +3,7 @@ package sn.sonatel.ci_diourbel.fiber_failure_locator.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,16 +20,11 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(
-                (requests) -> requests
-                        .requestMatchers("/css/**").permitAll()
-                        .requestMatchers("/img/**").permitAll()
-                        .requestMatchers("/js/**").permitAll()
-                        .requestMatchers("/scss/**").permitAll()
-                        .requestMatchers("/vendor/**").permitAll()
-                        .requestMatchers("/uploads/**").permitAll()
-                        .anyRequest().authenticated())
-                .formLogin((form) -> form.loginPage("/login").permitAll())
+		http.authorizeRequests(
+						(requests) -> requests
+								.requestMatchers("/css/**", "/img/**", "/js/**", "/scss/**", "/vendor/**", "/uploads/**", "/api/**").permitAll()
+								.anyRequest().authenticated())
+				.formLogin((form) -> form.loginPage("/login").permitAll())
 				.logout((logout) -> {
 					logout.logoutUrl("/logout")
 							.permitAll()
@@ -36,9 +32,8 @@ public class WebSecurityConfig {
 							.deleteCookies("JSESSIONID")
 							.invalidateHttpSession(true);
 				})
-                .rememberMe(me -> me
-                        .key("rememberMe"));
-
+				.rememberMe(me -> me.key("rememberMe"))
+				.csrf().disable();
 		return http.build();
 	}
 

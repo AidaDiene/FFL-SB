@@ -63,7 +63,11 @@ public class PointImpact {
 		//this.user = user;
 		this.dateRecherche = dateRecherche;
 	}
-
+	public PointImpact(@NotNull Double latitude, @NotNull Double longitude) {
+		super();
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 	public Long getId() {
 		return id;
 	}
