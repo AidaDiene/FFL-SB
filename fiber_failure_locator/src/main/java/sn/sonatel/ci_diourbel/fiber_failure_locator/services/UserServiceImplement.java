@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -76,33 +77,58 @@ public class UserServiceImplement implements UserService {
                 User user = userRepo.findByEmail(customUserDetails.getUsername());
 
                 String originalFilename = file.getOriginalFilename();
-                String filename = generateFilename(user, originalFilename);
-
+                String filename = generateFilenameWithoutExtension(user);
+                String chemin = "src/main/resources/static/uploads";
+                User.deleteFileNameExists(chemin,"photoProfilAidaDienemat1");
+                filename = addExtensionToFilename(filename, originalFilename);
                 Path filePath = ROOT_PATH.resolve(filename);
-
-                if (Files.exists(filePath)) {
-                    Files.delete(filePath);
-                }
 
                 Files.copy(inputStream, filePath);
 
                 String photoPath = "uploads/" + filename;
                 user.setPhoto(photoPath);
                 userRepo.save(user);
+
+                //mettre a jour le chemin de la photo sur le getprincipal cad le userAuthentifier car lorsque la basse de donnes est modifie apres l'authentification il n'affiche pas ses mise a jour donc n'affiche pas la nouvelle photo de profil
+                CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                // Créez une nouvelle instance de CustomUserDetails avec le nouveau chemin de la photo
+                CustomUserDetails updatedUserDetails = new CustomUserDetails(
+                        userDetails.getPrenom(),
+                        userDetails.getNom(),
+                        userDetails.getMatricule(),
+                        userDetails.getTelephone(),
+                        userDetails.getUsername(),
+                        userDetails.getPassword(),
+                        userDetails.getAuthorities(),
+                        userDetails.isEnabled(),
+                        photoPath
+                );
+                Authentication currentAuthentication = SecurityContextHolder.getContext().getAuthentication();
+                // Créez un nouvel objet Authentication avec le nouvel objet principal
+                Authentication newAuthentication = new UsernamePasswordAuthenticationToken(
+                        updatedUserDetails,
+                        currentAuthentication.getCredentials(),
+                        currentAuthentication.getAuthorities()
+                );
+                // Remplacez l'objet Authentication dans le contexte de sécurité
+                SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+
             }
         } catch (Exception e) {
             throw new RuntimeException("Could not save the file: " + e.getMessage());
         }
     }
 
-    private String generateFilename(User user, String originalFilename) {
+    private String generateFilenameWithoutExtension(User user) {
         String filenameWithoutExtension = "photoProfil" + user.getPrenom() + user.getNom() + user.getMatricule();
-        String filename = filenameWithoutExtension;
+        return filenameWithoutExtension;
+    }
+    private String addExtensionToFilename(String fileName, String originalFilename) {
 
         int lastDotIndex = originalFilename.lastIndexOf(".");
         if (lastDotIndex != -1) {
-            filename += originalFilename.substring(lastDotIndex);
+            fileName += originalFilename.substring(lastDotIndex);
         }
-        return filename;
+        return fileName;
     }
 }

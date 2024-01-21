@@ -309,7 +309,7 @@ fonts.googleapis.com
 								<span class="mr-2 d-none d-lg-inline text-gray-600 small"
 									sec:authentication="principal.nom"></span>
 								<img class="img-profile rounded-circle" th:if="${#authentication.getPrincipal().photo}"
-									th:src="${#authentication.getPrincipal().photo}" alt="photoProfil">
+									th:src="@{${#authentication.getPrincipal().photo}}" alt="photoProfil">
 								<img class="img-profile rounded-circle"
 									th:unless="${#authentication.getPrincipal().photo}" th:src="@{/img/undraw_profile.svg}">
 

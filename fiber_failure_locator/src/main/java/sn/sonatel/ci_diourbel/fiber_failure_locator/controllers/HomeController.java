@@ -62,7 +62,6 @@ public class HomeController {
 		model.addAttribute("success", "Mot de passe modifié avec succés !");
 		return "change-password";
 	}
-
 	  @PostMapping("/files/upload")
 	  public String uploadFile(Model model, @RequestParam("file") MultipartFile file, Principal principal) {
 	    String message = "";
